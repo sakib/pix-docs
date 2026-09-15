@@ -44,3 +44,7 @@ the file exists. The list is in `static/img/screenshots/NEEDED.md`.
 ## Decisions
 
 See `DECISIONS.md`.
+
+Tokens also do not work inside JSX props (`<Diagram caption="...">`), for the
+same reason: they are expressions, not Markdown text. Write the name in body
+prose instead.

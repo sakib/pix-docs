@@ -9,7 +9,7 @@ sidebar_position: 1
 {{product}} is a **daemon** plus **clients**. Nearly everything else follows from
 that split.
 
-<Diagram name="architecture" caption="Clients are views. The daemon owns state and work, all of it under {{homeDir}}. Agents are child processes." />
+<Diagram name="architecture" caption="Clients are views. The daemon owns state and work, all of it in one directory on disk. Agents are child processes." />
 
 ## The daemon
 
