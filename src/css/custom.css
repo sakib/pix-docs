@@ -1,0 +1,245 @@
+/**
+ * Theme for the product docs.
+ *
+ * Carries the marketing site's classic-Mac identity — Oxanium display type,
+ * hard 1px borders, no soft shadows — and adds the colour and contrast that a
+ * long-form documentation site needs to stay readable.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700&display=swap');
+
+:root {
+  /* Amber accent against warm paper. Ramp is darkest-to-lightest so the
+     darker steps stay available for text on light backgrounds. */
+  --ifm-color-primary: #a8410b;
+  --ifm-color-primary-dark: #973a0a;
+  --ifm-color-primary-darker: #8e370a;
+  --ifm-color-primary-darkest: #752d08;
+  --ifm-color-primary-light: #b9480c;
+  --ifm-color-primary-lighter: #c24b0d;
+  --ifm-color-primary-lightest: #db5610;
+
+  --ifm-background-color: #f7f7f4;
+  --ifm-background-surface-color: #fffffd;
+  --ifm-font-color-base: #1c1c1a;
+
+  --ifm-heading-font-family: 'Oxanium', ui-monospace, 'SF Mono', SFMono-Regular,
+    Menlo, Monaco, Consolas, monospace;
+  --ifm-font-family-monospace: ui-monospace, 'SF Mono', SFMono-Regular, Menlo,
+    Monaco, Consolas, 'Liberation Mono', monospace;
+
+  --ifm-code-font-size: 88%;
+  --ifm-heading-font-weight: 700;
+  --ifm-global-radius: 2px;
+  --ifm-global-shadow-lw: none;
+  --ifm-global-shadow-md: none;
+  --ifm-global-shadow-tl: none;
+
+  --docusaurus-highlighted-code-line-bg: rgba(168, 65, 11, 0.12);
+
+  --pix-rule: #d6d4cc;
+  --pix-ink-soft: #55534d;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #f0a868;
+  --ifm-color-primary-dark: #ec9448;
+  --ifm-color-primary-darker: #ea8a38;
+  --ifm-color-primary-darkest: #d8701a;
+  --ifm-color-primary-light: #f4bc88;
+  --ifm-color-primary-lighter: #f6c698;
+  --ifm-color-primary-lightest: #fae2c8;
+
+  --ifm-background-color: #17171a;
+  --ifm-background-surface-color: #1e1e22;
+  --ifm-font-color-base: #e8e6e1;
+
+  --docusaurus-highlighted-code-line-bg: rgba(240, 168, 104, 0.16);
+
+  --pix-rule: #33333a;
+  --pix-ink-soft: #a5a29b;
+}
+
+/* Display type. Tightened because Oxanium is wide by default. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+/* Hard rules under section headings, in the spirit of a classic Mac window. */
+.markdown > h2 {
+  border-bottom: 1px solid var(--pix-rule);
+  padding-bottom: 0.3em;
+  margin-top: 2.5rem;
+}
+
+/* Flat chrome: the retro look is hard edges, not drop shadows. */
+.navbar {
+  border-bottom: 1px solid var(--pix-rule);
+}
+
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.footer {
+  border-top: 1px solid var(--pix-rule);
+}
+
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--pix-rule) !important;
+}
+
+/* Tables carry a lot of the reference content, so they get real borders. */
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.markdown table th,
+.markdown table td {
+  border: 1px solid var(--pix-rule);
+}
+
+.markdown table thead tr {
+  border-bottom: 2px solid var(--pix-rule);
+}
+
+.markdown table th {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Admonitions: square them off. */
+.theme-admonition {
+  border-radius: 2px;
+  border-left-width: 3px;
+}
+
+/* Code blocks read better with a visible boundary on warm paper. */
+.theme-code-block {
+  border: 1px solid var(--pix-rule);
+}
+
+/* Inline code should not shout; it appears constantly in this content. */
+.markdown code {
+  border: 1px solid var(--pix-rule);
+  background-color: var(--ifm-background-surface-color);
+}
+
+.markdown a code {
+  color: inherit;
+}
+
+/* Sidebar category labels, in display type to separate them from links. */
+.menu__list-item-collapsible > .menu__link--sublist {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pix-ink-soft);
+}
+
+.table-of-contents {
+  border-left: 1px solid var(--pix-rule);
+}
+
+/* ---------- Phase 4 polish ---------- */
+
+/* Reading measure for doc pages. */
+.theme-doc-markdown {
+  max-width: 780px;
+}
+
+.markdown > h1:first-child {
+  font-size: 2.4rem;
+  margin-bottom: 0.6rem;
+}
+
+/* The first paragraph after the title reads as a lede. */
+.markdown > h1:first-child + p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--pix-ink-soft);
+  margin-bottom: 1.75rem;
+}
+
+/* Sidebar: tighter rows, quieter text. */
+.menu__link {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 2px;
+}
+.menu__list .menu__list {
+  margin-left: 0.4rem;
+  border-left: 1px solid var(--pix-rule);
+  padding-left: 0.2rem;
+}
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 2px solid var(--ifm-color-primary);
+  border-radius: 0;
+}
+
+/* Category icons via mask-image so they inherit the label colour. */
+.menu__list-item-collapsible > .menu__link--sublist::before,
+.menu__list-item > .menu__link.sidebar-icon::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 0.5rem;
+  vertical-align: -2px;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) no-repeat center / contain;
+  mask: var(--icon) no-repeat center / contain;
+}
+.sidebar-getting-started > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E"); }
+.sidebar-guides > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-7a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h7z'/%3E%3C/svg%3E"); }
+.sidebar-internals > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2'/%3E%3C/svg%3E"); }
+.sidebar-enterprise > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='4' y='3' width='16' height='18'/%3E%3Cpath d='M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2'/%3E%3C/svg%3E"); }
+
+/* Tables: zebra rows and a sticky header for the long reference tables. */
+.markdown table tbody tr:nth-child(even) {
+  background: rgba(128, 128, 128, 0.05);
+}
+.markdown table thead th {
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  background: var(--ifm-background-surface-color);
+}
+
+/* Admonitions in the site palette. */
+.theme-admonition {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--pix-rule);
+  border-left-width: 3px;
+}
+.theme-admonition-tip { border-left-color: var(--ifm-color-primary); }
+.theme-admonition-info { border-left-color: var(--pix-ink-soft); }
+.theme-admonition-caution { border-left-color: #b45309; }
+.theme-admonition-warning,
+.theme-admonition-danger { border-left-color: #b91c1c; }
+
+/* Navbar download call-to-action. */
+.navbar__download {
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  margin-left: 0.5rem;
+  color: var(--ifm-color-primary);
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 600;
+}
+
+/* Mermaid inherits the theme rule colour. */
+.docusaurus-mermaid-container {
+  margin: 1.5rem 0 2rem;
+  border: 1px solid var(--pix-rule);
+  padding: 1rem;
+}

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" role="img" aria-labelledby="t" style="font-family: var(--ifm-font-family-monospace); font-size: 12px">
+  <title id="t">A handoff changes the agent inside one session; a branch starts a new session from a turn</title>
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <!-- handoff row -->
+    <text x="20" y="45" fill="currentColor" stroke="none" style="font-family: var(--ifm-heading-font-family); font-size: 13px; font-weight: 700">Handoff</text>
+    <text x="20" y="63" fill="currentColor" stroke="none" opacity=".7" style="font-size: 11px">same session · new agent</text>
+    <line x1="220" y1="60" x2="780" y2="60"/>
+    <g>
+      <circle cx="260" cy="60" r="7"/><circle cx="330" cy="60" r="7"/><circle cx="400" cy="60" r="7"/>
+      <circle cx="470" cy="60" r="7" style="fill: var(--ifm-color-primary); stroke: var(--ifm-color-primary)"/>
+      <circle cx="540" cy="60" r="7" style="fill: var(--ifm-color-primary); stroke: var(--ifm-color-primary)"/>
+      <circle cx="610" cy="60" r="7" style="fill: var(--ifm-color-primary); stroke: var(--ifm-color-primary)"/>
+      <circle cx="680" cy="60" r="7" style="fill: var(--ifm-color-primary); stroke: var(--ifm-color-primary)"/>
+    </g>
+    <line x1="435" y1="35" x2="435" y2="85" stroke-dasharray="3 3"/>
+    <text x="330" y="100" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">turns by agent A</text>
+    <text x="575" y="100" text-anchor="middle" stroke="none" style="fill: var(--ifm-color-primary)">turns by agent B</text>
+    <!-- branch row -->
+    <text x="20" y="185" fill="currentColor" stroke="none" style="font-family: var(--ifm-heading-font-family); font-size: 13px; font-weight: 700">Branch</text>
+    <text x="20" y="203" fill="currentColor" stroke="none" opacity=".7" style="font-size: 11px">new session · same context</text>
+    <line x1="220" y1="200" x2="780" y2="200"/>
+    <g>
+      <circle cx="260" cy="200" r="7"/><circle cx="330" cy="200" r="7"/><circle cx="400" cy="200" r="7"/>
+      <circle cx="470" cy="200" r="7"/><circle cx="540" cy="200" r="7"/><circle cx="610" cy="200" r="7"/>
+    </g>
+    <path d="M400 200 C 440 200, 440 260, 480 260 L 780 260" style="stroke: var(--ifm-color-primary)"/>
+    <g style="fill: var(--ifm-color-primary); stroke: var(--ifm-color-primary)">
+      <circle cx="540" cy="260" r="7"/><circle cx="610" cy="260" r="7"/><circle cx="680" cy="260" r="7"/>
+    </g>
+    <text x="400" y="235" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8" style="font-size: 11px">fork at turn 3</text>
+    <text x="740" y="190" text-anchor="end" fill="currentColor" stroke="none" opacity=".8">original, untouched</text>
+    <text x="740" y="285" text-anchor="end" stroke="none" style="fill: var(--ifm-color-primary)">forkedFrom = original</text>
+  </g>
+</svg>

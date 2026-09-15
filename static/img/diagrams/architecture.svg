@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 340" role="img" aria-labelledby="t" style="font-family: var(--ifm-font-family-monospace); font-size: 12px">
+  <title id="t">Clients connect to one local daemon, which drives agent runtimes</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <!-- clients -->
+    <g id="clients">
+      <rect x="20" y="30" width="150" height="34"/><text x="95" y="52" text-anchor="middle" fill="currentColor" stroke="none">Mac app</text>
+      <rect x="20" y="84" width="150" height="34"/><text x="95" y="106" text-anchor="middle" fill="currentColor" stroke="none">Linux app</text>
+      <rect x="20" y="138" width="150" height="34"/><text x="95" y="160" text-anchor="middle" fill="currentColor" stroke="none">iPhone</text>
+      <rect x="20" y="192" width="150" height="34"/><text x="95" y="214" text-anchor="middle" fill="currentColor" stroke="none">iPad</text>
+      <rect x="20" y="246" width="150" height="34"/><text x="95" y="268" text-anchor="middle" fill="currentColor" stroke="none">Browser</text>
+    </g>
+    <!-- links from clients to daemon -->
+    <path d="M170 47 L300 47 L300 155 L330 155" marker-end="url(#arr)"/>
+    <path d="M170 101 L300 101"/>
+    <path d="M170 155 L330 155"/>
+    <path d="M170 209 L300 209"/>
+    <path d="M170 263 L300 263 L300 155"/>
+    <!-- daemon -->
+    <rect x="330" y="95" width="180" height="120" stroke-width="2" style="stroke: var(--ifm-color-primary)"/>
+    <text x="420" y="122" text-anchor="middle" fill="currentColor" stroke="none" style="font-family: var(--ifm-heading-font-family); font-size: 15px; font-weight: 700">daemon</text>
+    <text x="420" y="145" text-anchor="middle" fill="currentColor" stroke="none">ws://127.0.0.1:8790</text>
+    <text x="420" y="165" text-anchor="middle" fill="currentColor" stroke="none">mDNS _pix._tcp</text>
+    <text x="420" y="195" text-anchor="middle" stroke="none" style="fill: var(--ifm-color-primary)">state on disk</text>
+    <!-- links daemon to agents -->
+    <path d="M510 155 L560 155 L560 47 L600 47" marker-end="url(#arr)"/>
+    <path d="M560 101 L600 101" marker-end="url(#arr)"/>
+    <path d="M560 155 L600 155" marker-end="url(#arr)"/>
+    <path d="M560 155 L560 209 L600 209" marker-end="url(#arr)"/>
+    <!-- agents -->
+    <rect x="600" y="30" width="200" height="34"/><text x="700" y="52" text-anchor="middle" fill="currentColor" stroke="none">Claude Code</text>
+    <rect x="600" y="84" width="200" height="34"/><text x="700" y="106" text-anchor="middle" fill="currentColor" stroke="none">Codex</text>
+    <rect x="600" y="138" width="200" height="34"/><text x="700" y="160" text-anchor="middle" fill="currentColor" stroke="none">Cursor</text>
+    <rect x="600" y="192" width="200" height="34"/><text x="700" y="214" text-anchor="middle" fill="currentColor" stroke="none">Pi</text>
+  </g>
+  <g fill="currentColor" style="font-family: var(--ifm-heading-font-family); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .65">
+    <text x="20" y="316">clients · views only</text>
+    <text x="330" y="316">owns state and work</text>
+    <text x="600" y="316">agent runtimes · child processes</text>
+  </g>
+</svg>

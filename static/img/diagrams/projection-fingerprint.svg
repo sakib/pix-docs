@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 320" role="img" aria-labelledby="t" style="font-family: var(--ifm-font-family-monospace); font-size: 12px">
+  <title id="t">How a projection decides whether to read only new bytes or rebuild</title>
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="20" y="130" width="150" height="60"/>
+    <text x="95" y="155" text-anchor="middle" fill="currentColor" stroke="none">native log</text>
+    <text x="95" y="175" text-anchor="middle" fill="currentColor" stroke="none" opacity=".7">on next pass</text>
+    <path d="M170 160 L210 160" marker-end="url(#arr3)"/>
+    <rect x="210" y="115" width="180" height="90"/>
+    <text x="300" y="140" text-anchor="middle" fill="currentColor" stroke="none">same identity?</text>
+    <text x="300" y="160" text-anchor="middle" fill="currentColor" stroke="none">size only grew?</text>
+    <text x="300" y="180" text-anchor="middle" fill="currentColor" stroke="none">64 KiB prefix sha256 same?</text>
+    <text x="300" y="198" text-anchor="middle" fill="currentColor" stroke="none" opacity=".7" style="font-size:10px">device:inode · bytes · hash</text>
+    <path d="M390 140 L470 140 L470 70 L500 70" marker-end="url(#arr3)"/>
+    <text x="440" y="60" fill="currentColor" stroke="none" style="fill: var(--ifm-color-primary)">all yes</text>
+    <path d="M390 180 L470 180 L470 250 L500 250" marker-end="url(#arr3)"/>
+    <text x="440" y="240" fill="currentColor" stroke="none">any no</text>
+    <rect x="500" y="40" width="290" height="60" stroke-width="2" style="stroke: var(--ifm-color-primary)"/>
+    <text x="645" y="65" text-anchor="middle" fill="currentColor" stroke="none">read only the new bytes</text>
+    <text x="645" y="85" text-anchor="middle" fill="currentColor" stroke="none" opacity=".7">projection is a valid prefix</text>
+    <rect x="500" y="220" width="290" height="60"/>
+    <text x="645" y="245" text-anchor="middle" fill="currentColor" stroke="none">discard and rebuild</text>
+    <text x="645" y="265" text-anchor="middle" fill="currentColor" stroke="none" opacity=".7">replaced · truncated · rewritten</text>
+  </g>
+</svg>

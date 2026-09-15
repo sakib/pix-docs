@@ -1,0 +1,38 @@
+.figure {
+  margin: 1.5rem 0 2rem;
+}
+.figure img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--pix-rule);
+  border-radius: 3px;
+}
+.figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--pix-ink-soft);
+}
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--pix-rule);
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 10px, rgba(128,128,128,0.06) 10px 20px);
+  color: var(--pix-ink-soft);
+}
+.badge {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+.name {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+}

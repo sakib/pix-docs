@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#17171a"/>
+  <g stroke="#33333a" stroke-width="1">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200M200 0V630M400 0V630M600 0V630M800 0V630M1000 0V630"/>
+  </g>
+  <g fill="#f0a868" shape-rendering="crispEdges">
+    <rect x="96" y="120" width="40" height="40"/><rect x="152" y="120" width="40" height="40"/>
+    <rect x="96" y="176" width="40" height="40"/><rect x="152" y="176" width="40" height="40"/>
+  </g>
+  <text x="96" y="330" font-family="Oxanium, Menlo, monospace" font-size="120" font-weight="700" fill="#e8e6e1">Pix</text>
+  <text x="96" y="400" font-family="Oxanium, Menlo, monospace" font-size="40" font-weight="600" fill="#f0a868">One place for every coding agent.</text>
+  <text x="96" y="470" font-family="Menlo, monospace" font-size="26" fill="#a5a29b">Documentation · thejalalorganization.github.io/pix-docs</text>
+</svg>
