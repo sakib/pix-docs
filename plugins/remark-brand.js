@@ -14,8 +14,8 @@
  * plugin carries no dependency of its own — it has to keep working across
  * Docusaurus upgrades that reshuffle transitive deps.
  *
- * Note: frontmatter is extracted before remark runs, so tokens do not work
- * there. Keep frontmatter free of brand names; put them in the body instead.
+ * Frontmatter is extracted before remark runs, so it is handled separately by
+ * the parseFrontMatter hook in docusaurus.config.ts.
  */
 const LITERAL_TOKEN = /\{\{(\w+)\}\}/g;
 const MDX_EXPRESSION = /^\{\s*(\w+)\s*\}$/;

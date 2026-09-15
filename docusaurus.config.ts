@@ -35,7 +35,23 @@ const config: Config = {
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
-  markdown: {hooks: {onBrokenMarkdownLinks: 'warn'}, mermaid: true},
+  markdown: {
+    hooks: {onBrokenMarkdownLinks: 'warn'},
+    mermaid: true,
+    // Frontmatter is parsed before remark runs, so the remark plugin never
+    // sees it. Substitute brand tokens in title/description/sidebar_label here.
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      const sub = (v: unknown) =>
+        typeof v === 'string'
+          ? v.replace(/\{\{(\w+)\}\}/g, (m, k) => (k in brandTokens.vars ? (brandTokens.vars as Record<string, string>)[k] : m))
+          : v;
+      for (const key of ['title', 'description', 'sidebar_label']) {
+        if (key in result.frontMatter) result.frontMatter[key] = sub(result.frontMatter[key]);
+      }
+      return result;
+    },
+  },
   themes: ['@docusaurus/theme-mermaid'],
 
   i18n: {defaultLocale: 'en', locales: ['en']},

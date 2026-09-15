@@ -6,12 +6,16 @@ default:
     @just --list
 
 # Serve the docs locally with hot reload (http://localhost:3000/pix-docs/)
-docs:
+docs: llms
     npm run start
 
-# Production build into ./build
-build:
+# Production build into ./build (regenerates static/llms.txt first)
+build: llms
     npm run build
+
+# Regenerate static/llms.txt from sidebars + frontmatter
+llms:
+    node scripts/llms.mjs
 
 # Serve the production build (checks what GitHub Pages will publish)
 serve: build

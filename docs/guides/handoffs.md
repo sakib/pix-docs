@@ -2,6 +2,7 @@
 id: handoffs
 title: Handoffs
 sidebar_position: 2
+description: Continue any session with a different agent. What carries over, what does not, and when to branch instead.
 ---
 
 # Handoffs

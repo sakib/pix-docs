@@ -2,6 +2,7 @@
 id: first-session
 title: Your first session
 sidebar_position: 2
+description: Add a project, pick an agent, send a prompt, use the surfaces, and find the session again.
 ---
 
 # Your first session

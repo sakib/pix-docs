@@ -1,9 +1,10 @@
 ---
 id: intro
-title: Introduction
-sidebar_label: Introduction
+title: What is {{product}}?
+sidebar_label: What is {{product}}?
 sidebar_position: 1
 slug: /intro
+description: What {{product}} is, the problem it solves, and where to start.
 ---
 
 # What is {{product}}?

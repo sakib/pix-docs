@@ -2,6 +2,7 @@
 id: usage-and-context
 title: Usage and context
 sidebar_position: 13
+description: Token spend, context occupancy, and classified errors reported per session.
 ---
 
 # Usage and context

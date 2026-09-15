@@ -1,0 +1,46 @@
+# Pix
+
+> One place for every coding agent. Documentation for Pix: user guides, internals reference, and enterprise edition.
+
+## Docs
+
+- [What is Pix?](https://thejalalorganization.github.io/pix-docs/intro): What Pix is, the problem it solves, and where to start.
+- [Install](https://thejalalorganization.github.io/pix-docs/getting-started/install): Install Pix on macOS, Linux, iPhone, and iPad, and confirm the daemon is running.
+- [Your first session](https://thejalalorganization.github.io/pix-docs/getting-started/first-session): Add a project, pick an agent, send a prompt, use the surfaces, and find the session again.
+- [Connecting agents](https://thejalalorganization.github.io/pix-docs/getting-started/connecting-agents): How Pix detects Claude Code, Codex, Cursor, and Pi, reuses their credentials, and shows only the controls each supports.
+- [Sessions](https://thejalalorganization.github.io/pix-docs/guides/sessions): What a session holds, its four states, live versus idle, and the append-only log behind it.
+- [Handoffs](https://thejalalorganization.github.io/pix-docs/guides/handoffs): Continue any session with a different agent. What carries over, what does not, and when to branch instead.
+- [Branching and forking](https://thejalalorganization.github.io/pix-docs/guides/branching): Fork a new session from any completed turn while leaving the original intact.
+- [References and mentions](https://thejalalorganization.github.io/pix-docs/guides/references): Use @ to attach files and folders and # to pull earlier sessions into the conversation.
+- [Search and the catalog](https://thejalalorganization.github.io/pix-docs/guides/search-and-catalog): Trigram full-text search across titles, prompts, paths, branches, and session states.
+- [Projects and scratch](https://thejalalorganization.github.io/pix-docs/guides/projects-and-scratch): Projects scope sessions to a repository; scratch sessions have no repository at all.
+- [Worktrees](https://thejalalorganization.github.io/pix-docs/guides/worktrees): Give each session its own git worktree so parallel agents cannot overwrite each other.
+- [Parallel work](https://thejalalorganization.github.io/pix-docs/guides/parallel-work): Run many sessions at once, keep background tasks alive, and see sub-agent work as linked sessions.
+- [Models and thinking](https://thejalalorganization.github.io/pix-docs/guides/models): Per-agent model, thinking level, and speed mode controls, and how to set defaults.
+- [Slash commands and skills](https://thejalalorganization.github.io/pix-docs/guides/commands-and-skills): Slash commands, skills, and MCP tools discovered per agent and per project root.
+- [Surfaces](https://thejalalorganization.github.io/pix-docs/guides/surfaces): Terminal, repository, browser, and simulator views beside the conversation.
+- [Remote access](https://thejalalorganization.github.io/pix-docs/guides/remote-access): One daemon, many clients: LAN discovery over mDNS and remote access over Tailscale.
+- [Usage and context](https://thejalalorganization.github.io/pix-docs/guides/usage-and-context): Token spend, context occupancy, and classified errors reported per session.
+- [Troubleshooting](https://thejalalorganization.github.io/pix-docs/troubleshooting): Daemon log, missing agents, stale caches, missing sessions, locks, ports, and reporting bugs.
+
+## Internals
+
+- [Architecture](https://thejalalorganization.github.io/pix-docs/under-the-hood/architecture): Daemon, clients, agent runtimes, workers, and the storage layering under ~/.pix.
+- [The ~/.pix directory](https://thejalalorganization.github.io/pix-docs/under-the-hood/pix-directory): Every file and directory in ~/.pix, and which of them are authoritative versus derived.
+- [Session log format](https://thejalalorganization.github.io/pix-docs/under-the-hood/session-log-format): The JSONL session log: metadata line, sequenced events, control records, and the event vocabulary.
+- [Snapshots and projections](https://thejalalorganization.github.io/pix-docs/under-the-hood/snapshots-and-projections): How native agent logs are projected, fingerprinted, and read incrementally, and how checkpoints resume indexing.
+- [Blobs](https://thejalalorganization.github.io/pix-docs/under-the-hood/blobs): Content-addressed storage for large tool outputs, referenced from the log by SHA-256.
+- [The index](https://thejalalorganization.github.io/pix-docs/under-the-hood/index-db): The SQLite catalog and FTS5 trigram index: schema, triggers, queries, and rebuilding.
+- [Native history import](https://thejalalorganization.github.io/pix-docs/under-the-hood/native-history-import): How sessions from Claude Code, Codex, and Pi are imported idempotently and kept current.
+- [Updates and release channels](https://thejalalorganization.github.io/pix-docs/under-the-hood/updates): Release channels, the update service, Linux staging, data format migrations, and build hardening.
+- [Privacy and data residency](https://thejalalorganization.github.io/pix-docs/under-the-hood/privacy): Where data lives, what leaves the machine, and what a security review should know.
+
+## Enterprise
+
+- [Editions](https://thejalalorganization.github.io/pix-docs/enterprise/editions): What is free for individuals and what the enterprise edition adds. Planned items are marked.
+- [Shared team server](https://thejalalorganization.github.io/pix-docs/enterprise/shared-server): A self-hosted team daemon with shared history and central compute. Planned.
+- [Identity and access](https://thejalalorganization.github.io/pix-docs/enterprise/identity-and-access): SSO, SCIM, roles, and device management for organisations. Planned.
+- [Audit and usage](https://thejalalorganization.github.io/pix-docs/enterprise/audit-and-usage): Org-wide usage, cost, and audit export built on the session logs that already exist.
+- [Policy controls](https://thejalalorganization.github.io/pix-docs/enterprise/policy): Centrally enforced agent, model, MCP, repository, and retention policy. Planned.
+- [Roadmap](https://thejalalorganization.github.io/pix-docs/roadmap): Collaborative sessions, configurable preview surfaces, optional runtimes, and more. Direction, not dates.
+

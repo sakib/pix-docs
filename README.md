@@ -24,9 +24,9 @@ just rename Sangam ~/.sangam https://sangam.sh
 just build
 ```
 
-Tokens do not work in frontmatter (`title:`, `description:`), because
-frontmatter is parsed before remark runs. Keep the name out of frontmatter; put
-it in the body.
+Frontmatter (`title`, `description`, `sidebar_label`) is substituted separately
+by the `parseFrontMatter` hook in `docusaurus.config.ts`, because frontmatter is
+parsed before remark runs.
 
 ## Adding a page
 

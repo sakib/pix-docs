@@ -2,6 +2,7 @@
 id: troubleshooting
 title: Troubleshooting
 sidebar_position: 91
+description: Daemon log, missing agents, stale caches, missing sessions, locks, ports, and reporting bugs.
 ---
 
 # Troubleshooting

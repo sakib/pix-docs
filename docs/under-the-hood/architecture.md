@@ -2,6 +2,7 @@
 id: architecture
 title: Architecture
 sidebar_position: 1
+description: Daemon, clients, agent runtimes, workers, and the storage layering under {{homeDir}}.
 ---
 
 # Architecture

@@ -2,6 +2,7 @@
 id: native-history-import
 title: Native history import
 sidebar_position: 7
+description: How sessions from Claude Code, Codex, and Pi are imported idempotently and kept current.
 ---
 
 # Native history import

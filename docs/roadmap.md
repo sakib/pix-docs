@@ -2,6 +2,7 @@
 id: roadmap
 title: Roadmap
 sidebar_position: 90
+description: Collaborative sessions, configurable preview surfaces, optional runtimes, and more. Direction, not dates.
 ---
 
 # Roadmap

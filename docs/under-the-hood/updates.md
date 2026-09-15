@@ -2,6 +2,7 @@
 id: updates
 title: Updates and release channels
 sidebar_position: 8
+description: Release channels, the update service, Linux staging, data format migrations, and build hardening.
 ---
 
 # Updates and release channels

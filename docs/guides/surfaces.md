@@ -2,6 +2,7 @@
 id: surfaces
 title: Surfaces
 sidebar_position: 11
+description: Terminal, repository, browser, and simulator views beside the conversation.
 ---
 
 # Surfaces

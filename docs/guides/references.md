@@ -2,6 +2,7 @@
 id: references
 title: References and mentions
 sidebar_position: 4
+description: Use @ to attach files and folders and # to pull earlier sessions into the conversation.
 ---
 
 # References and mentions

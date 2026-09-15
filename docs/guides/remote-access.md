@@ -2,6 +2,7 @@
 id: remote-access
 title: Remote access
 sidebar_position: 12
+description: One daemon, many clients: LAN discovery over mDNS and remote access over Tailscale.
 ---
 
 # Remote access
