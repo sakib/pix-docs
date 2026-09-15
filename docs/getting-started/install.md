@@ -2,7 +2,7 @@
 id: install
 title: Install
 sidebar_position: 1
-description: Install {{product}} on macOS, Linux, iPhone, and iPad, and confirm the daemon is running.
+description: "Install {{product}} on macOS, Linux, iPhone, and iPad, and confirm the daemon is running."
 ---
 
 # Install {{product}}

@@ -1,9 +1,9 @@
 ---
 id: pix-directory
-title: The {{homeDir}} directory
+title: "The {{homeDir}} directory"
 sidebar_label: "{{homeDir}} reference"
 sidebar_position: 2
-description: Every file and directory in {{homeDir}}, and which of them are authoritative versus derived.
+description: "Every file and directory in {{homeDir}}, and which of them are authoritative versus derived."
 ---
 
 # The `{{homeDir}}` directory
