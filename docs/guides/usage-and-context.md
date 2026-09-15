@@ -62,3 +62,11 @@ showing one generic failure message for every cause.
 Per-session usage aggregates into org-wide reporting in the enterprise edition —
 spend by team, by project, by agent, by model. See [Audit and
 usage](/enterprise/audit-and-usage).
+
+## Related
+
+<CardGrid cols={3}>
+  <Card title="Branching" icon="branch" href="/guides/branching">Start lean from where the task began.</Card>
+  <Card title="Models" icon="usage" href="/guides/models">Thinking levels and what they cost.</Card>
+  <Card title="Audit and usage" icon="building" href="/enterprise/audit-and-usage">Org-wide reporting (planned).</Card>
+</CardGrid>

@@ -93,10 +93,10 @@ Per agent, and per project-and-agent, in `settings-profile.json`:
 `null` means "use the agent's own default", which is usually the right choice —
 it tracks upstream changes instead of pinning you to a stale opinion.
 
-## Changing model mid-session
+## Related
 
-You can. The session keeps its identity and its history; subsequent turns use
-the new setting. Starting cheap and escalating when a problem turns out to be
-hard is a normal, good workflow.
-
-Changing the *agent* mid-session is a [handoff](/guides/handoffs).
+<CardGrid cols={3}>
+  <Card title="Handoffs" icon="handoff" href="/guides/handoffs">Change the agent, not just the model.</Card>
+  <Card title="Connecting agents" icon="play" href="/getting-started/connecting-agents">Capability honesty explained.</Card>
+  <Card title="Usage and context" icon="usage" href="/guides/usage-and-context">What thinking levels cost.</Card>
+</CardGrid>

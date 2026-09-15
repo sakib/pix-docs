@@ -69,10 +69,10 @@ warn [{{productLower}}] claude /Users/you/repos/meadowkind commands-by-root.json
 A stale command list is more useful than no command list, and the timestamp
 means you can tell which you are looking at.
 
-## MCP tools
+## Related
 
-MCP servers configured for an agent are available in {{product}} sessions, and their
-tool calls appear in the transcript like any other — with arguments and results
-visible. An MCP server that fails to connect is reported as a connection
-failure, not silently dropped, so you can tell the difference between "the tool
-does not exist" and "the tool is broken right now".
+<CardGrid cols={3}>
+  <Card title="Connecting agents" icon="play" href="/getting-started/connecting-agents">How discovery runs per agent.</Card>
+  <Card title="Directory reference" icon="gear" href="/under-the-hood/pix-directory">Where commands-by-root.json lives.</Card>
+  <Card title="Policy controls" icon="lock" href="/enterprise/policy">MCP allowlists for teams (planned).</Card>
+</CardGrid>

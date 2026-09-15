@@ -77,13 +77,10 @@ mark it done — from the couch.
 **Kicking off work you are not going to watch.** Start it from the phone in the
 morning; review it at your desk.
 
-## Security notes
+## Related
 
-- The daemon binds to **localhost**. LAN and remote access are explicit
-  opt-ins, not the default.
-- Pairing requires the token and device verifier in `{{homeDir}}`. Those files are
-  `0600` and should stay that way.
-- Tailscale means no public exposure. Prefer it to any form of port
-  forwarding.
-- All session data stays on the daemon machine. The phone is a viewport, not a
-  copy. See [Privacy](/under-the-hood/privacy).
+<CardGrid cols={3}>
+  <Card title="Privacy" icon="lock" href="/under-the-hood/privacy">What leaves the machine, and what does not.</Card>
+  <Card title="Architecture" icon="gear" href="/under-the-hood/architecture">Daemon and clients.</Card>
+  <Card title="Parallel work" icon="parallel" href="/guides/parallel-work">Long work you check on remotely.</Card>
+</CardGrid>

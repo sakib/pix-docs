@@ -78,3 +78,11 @@ They compose well. [Branch](/guides/branching) a session three ways, give each
 branch its own worktree, run all three at once, compare the diffs, keep the best
 one. That is a real experiment rather than three attempts overwriting each
 other.
+
+## Related
+
+<CardGrid cols={3}>
+  <Card title="Parallel work" icon="parallel" href="/guides/parallel-work">Why one worktree per session.</Card>
+  <Card title="Branching" icon="branch" href="/guides/branching">Three branches, three worktrees, one comparison.</Card>
+  <Card title="Surfaces" icon="surfaces" href="/guides/surfaces">The repository surface and diff review.</Card>
+</CardGrid>

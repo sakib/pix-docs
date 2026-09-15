@@ -75,8 +75,10 @@ A working habit: mark **done** aggressively when a session is finished. The
 default view stays honest, and `todo` stays a real list rather than an
 aspiration.
 
-## Where the index lives
+## Related
 
-`{{homeDir}}/index.db`, a SQLite database with an FTS5 virtual table. It is
-derived state, rebuildable from the session logs — deleting it costs you a
-reindex, not your history. Details in [The index](/under-the-hood/index-db).
+<CardGrid cols={3}>
+  <Card title="The index" icon="gear" href="/under-the-hood/index-db">Schema, FTS5 triggers, and rebuilding.</Card>
+  <Card title="Sessions" icon="sessions" href="/guides/sessions">The four states behind the labels.</Card>
+  <Card title="Projects and scratch" icon="book" href="/guides/projects-and-scratch">Organising the catalog.</Card>
+</CardGrid>

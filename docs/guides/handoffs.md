@@ -7,71 +7,65 @@ description: "Continue any session with a different agent. What carries over, wh
 
 # Handoffs
 
-A handoff continues an existing session with a **different agent**. The
-conversation, the decisions, and the work so far carry over; what changes is who
-is doing the work from here.
+A handoff continues an existing session with a different agent. The
+conversation, decisions, and work so far carry over. Only the agent changes.
 
 <Diagram name="handoff-vs-branch" caption="A handoff keeps the session and changes the agent. A branch keeps the context and starts a new session." />
 
-This is the feature that is genuinely hard to get elsewhere, because every agent
-stores history in its own private format. {{product}} can do it because it normalises
-all of them into one event log first.
+Every agent stores history in its own private format, which is why this is hard
+to get anywhere else. {{product}} normalises all of them into one event log first,
+so moving a conversation between agents is tractable.
 
-## Why hand off
+## Why
 
-**Cost.** Explore in something cheap. When the problem turns out to be real,
-hand it to something expensive. You pay premium rates only for the part that
-needed them.
+- **Cost.** Explore in a cheap model. Hand to an expensive one only when the
+  problem turns out to be real.
+- **Capability.** Some agents are better at long refactors, others at quick
+  edits, others have tools the rest lack.
+- **Availability.** An agent is rate-limited or down. Hand off and keep going.
+- **Review.** A second agent with different training has different blind
+  spots. Have it check the first one's work.
 
-**Capability.** Some agents are better at long refactors, others at quick
-edits, others have tools or integrations the rest do not.
+## How
 
-**Availability.** An agent is rate-limited, degraded, or down. Hand the session
-to one that is not, and keep working.
-
-**Verification.** Have a second agent, with different training and different
-failure modes, review what the first one did. It will not share the first
-agent's blind spots.
-
-## How to hand off
+Open the session and change the agent.
 
 <Screenshot src="handoff.png" caption="Changing the agent on an existing session." />
 
-Open a session and change the agent. {{product}} replays the conversation into the
-new agent as resume context and continues from there.
+{{product}} replays the conversation into the new agent as resume context. The
+session keeps its `sessionId`, its log, and its place in the catalog, and the
+handoff itself is recorded in the log.
 
-The session keeps its identity — same `sessionId`, same log file, same place in
-the catalog. The handoff is recorded in the log, so the history of *who did
-what* is preserved rather than flattened.
+## What carries
 
-## What carries and what does not
+**Carries:** the conversation, decisions, files touched, working directory and
+worktree, `@` and `#` attachments.
 
-**Carries:** the conversation, the decisions, the files touched, the working
-directory and worktree, your `@` and `#` attachments.
+**Does not carry:** agent-specific controls with no equivalent on the other
+side. Hand off from an agent with thinking levels to one without, and the
+thinking control disappears. See
+[capability honesty](/getting-started/connecting-agents#capability-honesty).
 
-**Does not carry:** anything agent-specific that has no equivalent on the other
-side. If you hand a session from an agent with thinking levels to one without,
-the thinking control disappears. This is [capability
-honesty](/getting-started/connecting-agents#capability-honesty) at work — {{product}}
-will not fabricate a control the new agent does not have.
-
-**Worth knowing:** the receiving agent gets the conversation as *context*, not
-as its own memory of having done the work. A good handoff prompt acknowledges
-that — "continue the refactor described above" beats "keep going."
+The receiving agent gets the conversation as context, not as memory of having
+done the work. "Continue the refactor described above" is a better first prompt
+than "keep going."
 
 ## Handoff or branch?
 
-They are different operations and it is worth being precise:
-
 | | Handoff | [Branch](/guides/branching) |
 | --- | --- | --- |
-| Session identity | Same session | New session |
+| Session | Same | New |
 | Agent | Changes | Usually the same |
-| Purpose | Different agent, same thread | Same thread, different direction |
-| Original | Continues | Left untouched |
+| Use it to change | *Who* | *What* |
+| Original | Continues | Untouched |
 
-Use a handoff to change *who*. Use a branch to change *what*.
+They compose. Branch from turn 12, then hand the branch to a different agent,
+and you have two agents on identical context.
 
-You can of course do both: branch from turn 12, then hand the branch to a
-different agent — which gives you a controlled A/B of two agents on identical
-context.
+## Related
+
+<CardGrid cols={3}>
+  <Card title="Branching" icon="branch" href="/guides/branching">Same context, new direction.</Card>
+  <Card title="Models" icon="usage" href="/guides/models">Change the model without changing the agent.</Card>
+  <Card title="Session log format" icon="gear" href="/under-the-hood/session-log-format">The normalised event vocabulary that makes this work.</Card>
+</CardGrid>

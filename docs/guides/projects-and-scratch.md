@@ -68,8 +68,10 @@ Use them for:
 They are full sessions — searchable, branchable, referenceable, handoff-capable.
 The only difference is the absence of a repository.
 
-### Promoting a scratch session
+## Related
 
-Design in scratch, then start a project session and `#`-reference the scratch
-one. The thinking carries into the repo without the repo history being polluted
-by the thinking.
+<CardGrid cols={3}>
+  <Card title="References" icon="search" href="/guides/references">Pull a scratch session into a project session with #.</Card>
+  <Card title="Search" icon="search" href="/guides/search-and-catalog">Filter with the chat and scratch labels.</Card>
+  <Card title="Worktrees" icon="parallel" href="/guides/worktrees">Why workspaceRoots has three fields.</Card>
+</CardGrid>

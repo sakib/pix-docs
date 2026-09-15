@@ -67,6 +67,8 @@ better prompt than a paragraph describing it.
 
 ## Related
 
-- [Branching](/guides/branching) — when you want to *continue* a session rather
-  than reference it
-- [Search](/guides/search-and-catalog) — finding the session to reference
+<CardGrid cols={3}>
+  <Card title="Branching" icon="branch" href="/guides/branching">Continue a session instead of referencing it.</Card>
+  <Card title="Search" icon="search" href="/guides/search-and-catalog">Find the session to reference.</Card>
+  <Card title="Sessions" icon="sessions" href="/guides/sessions">What a reference pulls in.</Card>
+</CardGrid>
