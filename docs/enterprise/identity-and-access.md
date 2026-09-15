@@ -1,8 +1,8 @@
 ---
 id: identity-and-access
-title: Identity and access
+title: "Identity and access"
 sidebar_position: 3
-description: SSO, SCIM, roles, and device management for organisations. Planned.
+description: "SSO, SCIM, roles, and device management for organisations. Planned."
 ---
 
 # Identity and access

@@ -1,8 +1,8 @@
 ---
 id: projects-and-scratch
-title: Projects and scratch
+title: "Projects and scratch"
 sidebar_position: 6
-description: Projects scope sessions to a repository; scratch sessions have no repository at all.
+description: "Projects scope sessions to a repository; scratch sessions have no repository at all."
 ---
 
 # Projects and scratch

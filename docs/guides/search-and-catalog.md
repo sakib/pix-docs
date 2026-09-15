@@ -1,8 +1,8 @@
 ---
 id: search-and-catalog
-title: Search and the catalog
+title: "Search and the catalog"
 sidebar_position: 5
-description: Trigram full-text search across titles, prompts, paths, branches, and session states.
+description: "Trigram full-text search across titles, prompts, paths, branches, and session states."
 ---
 
 # Search and the catalog

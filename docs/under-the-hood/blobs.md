@@ -1,8 +1,8 @@
 ---
 id: blobs
-title: Blobs
+title: "Blobs"
 sidebar_position: 5
-description: Content-addressed storage for large tool outputs, referenced from the log by SHA-256.
+description: "Content-addressed storage for large tool outputs, referenced from the log by SHA-256."
 ---
 
 # Blobs

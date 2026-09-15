@@ -1,8 +1,8 @@
 ---
 id: snapshots-and-projections
-title: Snapshots and projections
+title: "Snapshots and projections"
 sidebar_position: 4
-description: How native agent logs are projected, fingerprinted, and read incrementally, and how checkpoints resume indexing.
+description: "How native agent logs are projected, fingerprinted, and read incrementally, and how checkpoints resume indexing."
 ---
 
 # Snapshots and projections

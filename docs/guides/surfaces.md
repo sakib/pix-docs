@@ -1,8 +1,8 @@
 ---
 id: surfaces
-title: Surfaces
+title: "Surfaces"
 sidebar_position: 11
-description: Terminal, repository, browser, and simulator views beside the conversation.
+description: "Terminal, repository, browser, and simulator views beside the conversation."
 ---
 
 # Surfaces

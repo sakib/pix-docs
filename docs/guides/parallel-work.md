@@ -1,8 +1,8 @@
 ---
 id: parallel-work
-title: Parallel work
+title: "Parallel work"
 sidebar_position: 8
-description: Run many sessions at once, keep background tasks alive, and see sub-agent work as linked sessions.
+description: "Run many sessions at once, keep background tasks alive, and see sub-agent work as linked sessions."
 ---
 
 # Parallel work

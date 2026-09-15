@@ -1,8 +1,8 @@
 ---
 id: audit-and-usage
-title: Audit and usage
+title: "Audit and usage"
 sidebar_position: 4
-description: Org-wide usage, cost, and audit export built on the session logs that already exist.
+description: "Org-wide usage, cost, and audit export built on the session logs that already exist."
 ---
 
 # Audit and usage

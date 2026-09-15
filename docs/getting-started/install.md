@@ -1,6 +1,6 @@
 ---
 id: install
-title: Install
+title: "Install"
 sidebar_position: 1
 description: "Install {{product}} on macOS, Linux, iPhone, and iPad, and confirm the daemon is running."
 ---

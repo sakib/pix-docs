@@ -1,6 +1,6 @@
 ---
 id: connecting-agents
-title: Connecting agents
+title: "Connecting agents"
 sidebar_position: 3
 description: "How {{product}} detects Claude Code, Codex, Cursor, and Pi, reuses their credentials, and shows only the controls each supports."
 ---

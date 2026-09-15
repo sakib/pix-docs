@@ -1,8 +1,8 @@
 ---
 id: session-log-format
-title: Session log format
+title: "Session log format"
 sidebar_position: 3
-description: The JSONL session log: metadata line, sequenced events, control records, and the event vocabulary.
+description: "The JSONL session log: metadata line, sequenced events, control records, and the event vocabulary."
 ---
 
 # Session log format

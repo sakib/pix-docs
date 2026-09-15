@@ -1,8 +1,8 @@
 ---
 id: worktrees
-title: Worktrees
+title: "Worktrees"
 sidebar_position: 7
-description: Give each session its own git worktree so parallel agents cannot overwrite each other.
+description: "Give each session its own git worktree so parallel agents cannot overwrite each other."
 ---
 
 # Worktrees

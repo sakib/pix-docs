@@ -1,8 +1,8 @@
 ---
 id: shared-server
-title: Shared team server
+title: "Shared team server"
 sidebar_position: 2
-description: A self-hosted team daemon with shared history and central compute. Planned.
+description: "A self-hosted team daemon with shared history and central compute. Planned."
 ---
 
 # Shared team server

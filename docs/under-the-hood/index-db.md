@@ -1,8 +1,8 @@
 ---
 id: index-db
-title: The index
+title: "The index"
 sidebar_position: 6
-description: The SQLite catalog and FTS5 trigram index: schema, triggers, queries, and rebuilding.
+description: "The SQLite catalog and FTS5 trigram index: schema, triggers, queries, and rebuilding."
 ---
 
 # The index

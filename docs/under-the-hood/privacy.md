@@ -1,8 +1,8 @@
 ---
 id: privacy
-title: Privacy and data residency
+title: "Privacy and data residency"
 sidebar_position: 9
-description: Where data lives, what leaves the machine, and what a security review should know.
+description: "Where data lives, what leaves the machine, and what a security review should know."
 ---
 
 # Privacy and data residency

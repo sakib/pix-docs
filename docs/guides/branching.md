@@ -1,8 +1,8 @@
 ---
 id: branching
-title: Branching and forking
+title: "Branching and forking"
 sidebar_position: 3
-description: Fork a new session from any completed turn while leaving the original intact.
+description: "Fork a new session from any completed turn while leaving the original intact."
 ---
 
 # Branching and forking

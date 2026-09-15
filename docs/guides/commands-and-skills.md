@@ -1,8 +1,8 @@
 ---
 id: commands-and-skills
-title: Slash commands and skills
+title: "Slash commands and skills"
 sidebar_position: 10
-description: Slash commands, skills, and MCP tools discovered per agent and per project root.
+description: "Slash commands, skills, and MCP tools discovered per agent and per project root."
 ---
 
 # Slash commands and skills

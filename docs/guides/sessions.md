@@ -1,8 +1,8 @@
 ---
 id: sessions
-title: Sessions
+title: "Sessions"
 sidebar_position: 1
-description: What a session holds, its four states, live versus idle, and the append-only log behind it.
+description: "What a session holds, its four states, live versus idle, and the append-only log behind it."
 ---
 
 # Sessions

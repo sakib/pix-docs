@@ -1,8 +1,8 @@
 ---
 id: editions
-title: Editions
+title: "Editions"
 sidebar_position: 1
-description: What is free for individuals and what the enterprise edition adds. Planned items are marked.
+description: "What is free for individuals and what the enterprise edition adds. Planned items are marked."
 ---
 
 # Editions

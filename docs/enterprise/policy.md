@@ -1,8 +1,8 @@
 ---
 id: policy
-title: Policy controls
+title: "Policy controls"
 sidebar_position: 5
-description: Centrally enforced agent, model, MCP, repository, and retention policy. Planned.
+description: "Centrally enforced agent, model, MCP, repository, and retention policy. Planned."
 ---
 
 # Policy controls

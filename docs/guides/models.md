@@ -1,8 +1,8 @@
 ---
 id: models
-title: Models and thinking
+title: "Models and thinking"
 sidebar_position: 9
-description: Per-agent model, thinking level, and speed mode controls, and how to set defaults.
+description: "Per-agent model, thinking level, and speed mode controls, and how to set defaults."
 ---
 
 # Models and thinking
