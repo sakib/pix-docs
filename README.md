@@ -46,6 +46,10 @@ the file exists. The list is in `static/img/screenshots/NEEDED.md`.
 `just mintlify` regenerates https://github.com/thejalalorganization/pix-docs-mintlify
 from these docs. That repo is a build artifact; edit here, not there.
 
+The `mint` CLI refuses Node 25. Preview with an LTS Node, e.g.
+`PATH="$HOME/.nvm/versions/node/v24.21.0/bin:$PATH" mint dev` inside
+`pix-docs-mintlify`.
+
 ## Decisions
 
 See `DECISIONS.md`.
