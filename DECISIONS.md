@@ -53,3 +53,13 @@ surfaces (docs renderer and static site loader alongside the app simulator).
 - Product screenshots: see `static/img/screenshots/NEEDED.md`. Cannot be
   captured from the docs toolchain; need captures from the app.
 - Custom domain for the docs once the name is settled.
+
+## Queued (2026-09-16)
+
+1. **"Modern SaaS" variant of the docs site.** A second visual treatment of
+   pix-docs in the Linear/Vercel idiom: dark-first, Inter, gradients, large
+   screenshots, logo wall, pricing table. To be built as a theme switch or a
+   branch after the information-architecture rework below, so both variants
+   share content.
+2. **Information-architecture rework** modelled on docs.envzero.com. Plan in
+   progress; see the session notes and the plan file when approved.
