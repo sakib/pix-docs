@@ -29,7 +29,8 @@ const config: Config = {
   future: {v4: true, faster: true},
 
   url: `https://${brand.githubOrg}.github.io`,
-  baseUrl: `/${brand.githubRepo}/`,
+  // `just docs` sets BASE_URL=/ so the dev server answers at localhost:3000/.
+  baseUrl: process.env.BASE_URL ?? `/${brand.githubRepo}/`,
   organizationName: brand.githubOrg,
   projectName: brand.githubRepo,
   trailingSlash: false,

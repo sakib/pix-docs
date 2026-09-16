@@ -18,7 +18,7 @@ export const brand = {
   /** Company/org line. */
   org: 'The Jalal Organization',
   /** GitHub org that holds this docs repo. */
-  githubOrg: 'thejalalorganization',
+  githubOrg: 'sakib',
   githubRepo: 'pix-docs',
   tagline: 'One place for every coding agent.',
 } as const;

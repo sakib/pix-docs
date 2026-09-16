@@ -5,9 +5,10 @@ set shell := ["zsh", "-cu"]
 default:
     @just --list
 
-# Serve the docs locally with hot reload (http://localhost:3000/pix-docs/)
+# Serve the docs locally with hot reload at http://localhost:3000/
 docs: llms
-    npm run start
+    npm run clear
+    BASE_URL=/ npm run start
 
 # Production build into ./build (regenerates static/llms.txt first)
 build: llms
@@ -30,7 +31,7 @@ mintlify:
     node scripts/mintlify.mjs
 
 # Drive headless Chrome through the live site and report React crashes
-crash-check url="https://thejalalorganization.github.io/pix-docs":
+crash-check url="https://sakib.github.io/pix-docs":
     node scripts/crash-check.mjs {{url}}
 
 # Typecheck config and components

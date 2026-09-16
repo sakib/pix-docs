@@ -18,6 +18,9 @@ type Props = {
 export function Screenshot({src, caption}: Props) {
   const url = useBaseUrl(`/img/screenshots/${src}`);
   const [missing, setMissing] = React.useState(false);
+  const isDev = process.env.NODE_ENV === 'development';
+  // A public site should not advertise what it lacks; a dev server should.
+  if (missing && !isDev) return null;
   return (
     <figure className={styles.figure}>
       {missing ? (

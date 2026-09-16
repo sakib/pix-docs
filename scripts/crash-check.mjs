@@ -3,7 +3,7 @@
 import {spawn} from 'node:child_process';
 import WebSocket from 'ws';
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const BASE = process.argv[2] ?? 'https://thejalalorganization.github.io/pix-docs';
+const BASE = process.argv[2] ?? 'https://sakib.github.io/pix-docs';
 const port = 9333;
 const chrome = spawn(CHROME, ['--headless=new','--disable-gpu',`--remote-debugging-port=${port}`,`--user-data-dir=/tmp/cdp-profile-${process.pid}`,'--no-first-run','about:blank'], {stdio:'ignore'});
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
