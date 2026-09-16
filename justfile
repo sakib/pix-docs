@@ -42,6 +42,10 @@ mint-dev:
 palette name="":
     node scripts/palette.mjs {{name}}
 
+# Swatch picker at http://localhost:3334/ that re-themes the running mirror on click
+palette-picker:
+    node scripts/palette-picker.mjs
+
 # Restore the mirror's committed docs.json after palette review
 palette-reset:
     node scripts/palette.mjs --reset
