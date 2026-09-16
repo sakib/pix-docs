@@ -41,6 +41,11 @@ parsed before remark runs.
 Pages reference screenshots by filename and show a labelled placeholder until
 the file exists. The list is in `static/img/screenshots/NEEDED.md`.
 
+## Mintlify mirror
+
+`just mintlify` regenerates https://github.com/thejalalorganization/pix-docs-mintlify
+from these docs. That repo is a build artifact; edit here, not there.
+
 ## Decisions
 
 See `DECISIONS.md`.

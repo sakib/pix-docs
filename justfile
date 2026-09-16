@@ -25,6 +25,14 @@ serve: build
 rename name dir="" url="":
     node scripts/rename.mjs {{name}} {{ if dir != "" { "--dir " + dir } else { "" } }} {{ if url != "" { "--url " + url } else { "" } }}
 
+# Regenerate the Mintlify site in ../pix-docs-mintlify from these docs
+mintlify:
+    node scripts/mintlify.mjs
+
+# Drive headless Chrome through the live site and report React crashes
+crash-check url="https://thejalalorganization.github.io/pix-docs":
+    node scripts/crash-check.mjs {{url}}
+
 # Typecheck config and components
 check:
     npm run typecheck
