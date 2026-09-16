@@ -1,44 +1,59 @@
 /**
- * Theme for the product docs.
+ * Theme for the product docs, second pass.
  *
- * Carries the marketing site's classic-Mac identity — Oxanium display type,
- * hard 1px borders, no soft shadows — and adds the colour and contrast that a
- * long-form documentation site needs to stay readable.
+ * Target: the density and calm of a Mintlify "mint" site. Inter for body,
+ * Oxanium kept for the wordmark and H1 only, soft 1px borders, generous
+ * whitespace, rounded cards, quiet sidebar, and a pill-style tab bar. The
+ * accent hue lives in the primary variables so a palette change is a
+ * variable change.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oxanium:wght@600;700&display=swap');
 
 :root {
-  /* Amber accent against warm paper. Ramp is darkest-to-lightest so the
-     darker steps stay available for text on light backgrounds. */
-  --ifm-color-primary: #a8410b;
-  --ifm-color-primary-dark: #973a0a;
-  --ifm-color-primary-darker: #8e370a;
-  --ifm-color-primary-darkest: #752d08;
-  --ifm-color-primary-light: #b9480c;
-  --ifm-color-primary-lighter: #c24b0d;
-  --ifm-color-primary-lightest: #db5610;
+  --ifm-color-primary: #b3450c;
+  --ifm-color-primary-dark: #a13e0b;
+  --ifm-color-primary-darker: #983b0a;
+  --ifm-color-primary-darkest: #7d3008;
+  --ifm-color-primary-light: #c54c0d;
+  --ifm-color-primary-lighter: #ce4f0e;
+  --ifm-color-primary-lightest: #e75b12;
 
-  --ifm-background-color: #f7f7f4;
-  --ifm-background-surface-color: #fffffd;
-  --ifm-font-color-base: #1c1c1a;
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #fafafa;
+  --ifm-font-color-base: #18181b;
+  --ifm-color-content-secondary: #52525b;
 
-  --ifm-heading-font-family: 'Oxanium', ui-monospace, 'SF Mono', SFMono-Regular,
-    Menlo, Monaco, Consolas, monospace;
-  --ifm-font-family-monospace: ui-monospace, 'SF Mono', SFMono-Regular, Menlo,
-    Monaco, Consolas, 'Liberation Mono', monospace;
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ifm-font-family-monospace: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --pix-display-font: 'Oxanium', ui-monospace, monospace;
 
-  --ifm-code-font-size: 88%;
-  --ifm-heading-font-weight: 700;
-  --ifm-global-radius: 2px;
+  --ifm-font-size-base: 15.5px;
+  --ifm-line-height-base: 1.7;
+  --ifm-code-font-size: 85%;
+  --ifm-heading-font-weight: 600;
+  --ifm-h1-font-size: 2.1rem;
+  --ifm-h2-font-size: 1.45rem;
+  --ifm-h3-font-size: 1.15rem;
+
+  --ifm-global-radius: 8px;
   --ifm-global-shadow-lw: none;
   --ifm-global-shadow-md: none;
   --ifm-global-shadow-tl: none;
+  --ifm-navbar-height: 64px;
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: transparent;
+  --ifm-menu-color: #3f3f46;
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-color-background-active: rgba(179, 69, 12, 0.08);
+  --ifm-menu-color-background-hover: rgba(24, 24, 27, 0.04);
 
-  --docusaurus-highlighted-code-line-bg: rgba(168, 65, 11, 0.12);
+  --docusaurus-highlighted-code-line-bg: rgba(179, 69, 12, 0.1);
 
-  --pix-rule: #d6d4cc;
-  --pix-ink-soft: #55534d;
+  --pix-rule: #e4e4e7;
+  --pix-ink-soft: #52525b;
+  --pix-accent-soft: rgba(179, 69, 12, 0.08);
 }
 
 [data-theme='dark'] {
@@ -50,149 +65,74 @@
   --ifm-color-primary-lighter: #f6c698;
   --ifm-color-primary-lightest: #fae2c8;
 
-  --ifm-background-color: #17171a;
-  --ifm-background-surface-color: #1e1e22;
-  --ifm-font-color-base: #e8e6e1;
+  --ifm-background-color: #09090b;
+  --ifm-background-surface-color: #111114;
+  --ifm-font-color-base: #e4e4e7;
+  --ifm-color-content-secondary: #a1a1aa;
+  --ifm-menu-color: #a1a1aa;
+  --ifm-menu-color-background-active: rgba(240, 168, 104, 0.12);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.05);
+  --docusaurus-highlighted-code-line-bg: rgba(240, 168, 104, 0.14);
 
-  --docusaurus-highlighted-code-line-bg: rgba(240, 168, 104, 0.16);
-
-  --pix-rule: #33333a;
-  --pix-ink-soft: #a5a29b;
+  --pix-rule: #27272a;
+  --pix-ink-soft: #a1a1aa;
+  --pix-accent-soft: rgba(240, 168, 104, 0.12);
 }
 
-/* Display type. Tightened because Oxanium is wide by default. */
-h1,
-h2,
-h3 {
-  letter-spacing: -0.02em;
-}
-
-/* Hard rules under section headings, in the spirit of a classic Mac window. */
-.markdown > h2 {
-  border-bottom: 1px solid var(--pix-rule);
-  padding-bottom: 0.3em;
-  margin-top: 2.5rem;
-}
-
-/* Flat chrome: the retro look is hard edges, not drop shadows. */
-.navbar {
-  border-bottom: 1px solid var(--pix-rule);
-}
-
-.navbar__title {
-  font-family: var(--ifm-heading-font-family);
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-.footer {
-  border-top: 1px solid var(--pix-rule);
-}
-
-.theme-doc-sidebar-container {
-  border-right: 1px solid var(--pix-rule) !important;
-}
-
-/* Tables carry a lot of the reference content, so they get real borders. */
-.markdown table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.markdown table th,
-.markdown table td {
-  border: 1px solid var(--pix-rule);
-}
-
-.markdown table thead tr {
-  border-bottom: 2px solid var(--pix-rule);
-}
-
-.markdown table th {
-  font-family: var(--ifm-heading-font-family);
-  font-weight: 600;
-  text-align: left;
-}
-
-/* Admonitions: square them off. */
-.theme-admonition {
-  border-radius: 2px;
-  border-left-width: 3px;
-}
-
-/* Code blocks read better with a visible boundary on warm paper. */
-.theme-code-block {
-  border: 1px solid var(--pix-rule);
-}
-
-/* Inline code should not shout; it appears constantly in this content. */
-.markdown code {
-  border: 1px solid var(--pix-rule);
-  background-color: var(--ifm-background-surface-color);
-}
-
-.markdown a code {
-  color: inherit;
-}
-
-/* Sidebar category labels, in display type to separate them from links. */
-.menu__list-item-collapsible > .menu__link--sublist {
-  font-family: var(--ifm-heading-font-family);
-  font-weight: 600;
-  font-size: 0.86rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--pix-ink-soft);
-}
-
-.table-of-contents {
-  border-left: 1px solid var(--pix-rule);
-}
-
-/* ---------- Phase 4 polish ---------- */
-
-/* Reading measure for doc pages. */
-.theme-doc-markdown {
-  max-width: 780px;
-}
-
-.markdown > h1:first-child {
-  font-size: 2.4rem;
-  margin-bottom: 0.6rem;
-}
-
-/* The first paragraph after the title reads as a lede. */
+/* ---------- Typography ---------- */
+h1, h2, h3, h4 { letter-spacing: -0.015em; }
+.markdown > h1:first-child { font-size: 2.1rem; margin-bottom: 0.5rem; }
 .markdown > h1:first-child + p {
   font-size: 1.1rem;
-  line-height: 1.6;
-  color: var(--pix-ink-soft);
-  margin-bottom: 1.75rem;
+  line-height: 1.65;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 2rem;
 }
+.markdown > h2 { margin-top: 2.75rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--pix-rule); }
+.markdown > h3 { margin-top: 2rem; }
+.theme-doc-markdown { max-width: 760px; }
 
-/* Sidebar: tighter rows, quieter text. */
-.menu__link {
+/* ---------- Navbar: wordmark, pill tabs, outlined download ---------- */
+.navbar { border-bottom: 1px solid var(--pix-rule); padding: 0 1.25rem; }
+.navbar__title { font-family: var(--pix-display-font); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.01em; }
+.navbar__items:not(.navbar__items--right) .navbar__item.navbar__link {
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.35rem 0.8rem;
+  margin: 0 0.1rem;
+  border-radius: 999px;
+  color: var(--ifm-color-content-secondary);
+}
+.navbar__items:not(.navbar__items--right) .navbar__link:hover { background: var(--ifm-menu-color-background-hover); color: var(--ifm-font-color-base); }
+.navbar__items:not(.navbar__items--right) .navbar__link--active { background: var(--pix-accent-soft); color: var(--ifm-color-primary); }
+.navbar__download {
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 0.35rem 0.9rem;
+  margin-left: 0.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
   font-size: 0.9rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 2px;
 }
-.menu__list .menu__list {
-  margin-left: 0.4rem;
-  border-left: 1px solid var(--pix-rule);
-  padding-left: 0.2rem;
-}
-.menu__link--active:not(.menu__link--sublist) {
-  border-left: 2px solid var(--ifm-color-primary);
-  border-radius: 0;
-}
+.navbar__download:hover { background: var(--pix-accent-soft); }
 
-/* Category icons via mask-image so they inherit the label colour. */
-.menu__list-item-collapsible > .menu__link--sublist::before,
-.menu__list-item > .menu__link.sidebar-icon::before {
+/* ---------- Sidebar: quiet, icon-led groups, rounded active row ---------- */
+.theme-doc-sidebar-container { border-right: 1px solid var(--pix-rule) !important; }
+.theme-doc-sidebar-menu { padding: 0.5rem 0.75rem; }
+.menu__link { font-size: 0.9rem; padding: 0.38rem 0.6rem; border-radius: 6px; line-height: 1.35; }
+.menu__list .menu__list { margin-left: 0.15rem; padding-left: 0.35rem; border-left: 1px solid var(--pix-rule); }
+.menu__list-item-collapsible > .menu__link--sublist {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pix-ink-soft);
+  margin-top: 0.9rem;
+}
+.menu__list-item-collapsible > .menu__link--sublist::before {
   content: '';
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 13px; height: 13px;
   margin-right: 0.5rem;
   vertical-align: -2px;
   background-color: currentColor;
@@ -203,43 +143,34 @@ h3 {
 .sidebar-guides > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-7a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h7z'/%3E%3C/svg%3E"); }
 .sidebar-internals > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2'/%3E%3C/svg%3E"); }
 .sidebar-enterprise > .menu__link--sublist { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='4' y='3' width='16' height='18'/%3E%3Cpath d='M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2'/%3E%3C/svg%3E"); }
+.menu__link--active:not(.menu__link--sublist) { font-weight: 500; }
 
-/* Tables: zebra rows and a sticky header for the long reference tables. */
-.markdown table tbody tr:nth-child(even) {
-  background: rgba(128, 128, 128, 0.05);
-}
-.markdown table thead th {
-  position: sticky;
-  top: var(--ifm-navbar-height);
-  background: var(--ifm-background-surface-color);
-}
+/* ---------- Right rail ---------- */
+.table-of-contents { border-left: 1px solid var(--pix-rule); font-size: 0.82rem; }
+.table-of-contents__link { color: var(--pix-ink-soft); }
+.table-of-contents__link--active { color: var(--ifm-color-primary); font-weight: 500; }
 
-/* Admonitions in the site palette. */
-.theme-admonition {
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--pix-rule);
-  border-left-width: 3px;
-}
+/* ---------- Content chrome ---------- */
+.markdown table { display: table; width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--pix-rule); border-radius: 8px; overflow: hidden; font-size: 0.9rem; }
+.markdown table th, .markdown table td { border: 0; border-bottom: 1px solid var(--pix-rule); padding: 0.55rem 0.8rem; }
+.markdown table tr:last-child td { border-bottom: 0; }
+.markdown table thead th { background: var(--ifm-background-surface-color); font-weight: 600; text-align: left; }
+.markdown table tbody tr:nth-child(even) { background: transparent; }
+
+.theme-code-block { border: 1px solid var(--pix-rule); border-radius: 8px; box-shadow: none; }
+.markdown code { border: 1px solid var(--pix-rule); background: var(--ifm-background-surface-color); border-radius: 5px; padding: 0.1rem 0.35rem; }
+.markdown a code { color: inherit; }
+
+.theme-admonition { border: 1px solid var(--pix-rule); border-left-width: 3px; border-radius: 8px; background: var(--ifm-background-surface-color); box-shadow: none; }
 .theme-admonition-tip { border-left-color: var(--ifm-color-primary); }
-.theme-admonition-info { border-left-color: var(--pix-ink-soft); }
-.theme-admonition-caution { border-left-color: #b45309; }
-.theme-admonition-warning,
-.theme-admonition-danger { border-left-color: #b91c1c; }
+.theme-admonition-info { border-left-color: #2563eb; }
+.theme-admonition-caution { border-left-color: #d97706; }
+.theme-admonition-warning, .theme-admonition-danger { border-left-color: #dc2626; }
 
-/* Navbar download call-to-action. */
-.navbar__download {
-  border: 1px solid var(--ifm-color-primary);
-  border-radius: 3px;
-  padding: 0.25rem 0.7rem;
-  margin-left: 0.5rem;
-  color: var(--ifm-color-primary);
-  font-family: var(--ifm-heading-font-family);
-  font-weight: 600;
-}
+.docusaurus-mermaid-container { margin: 1.5rem 0 2rem; border: 1px solid var(--pix-rule); border-radius: 8px; padding: 1rem; }
 
-/* Mermaid inherits the theme rule colour. */
-.docusaurus-mermaid-container {
-  margin: 1.5rem 0 2rem;
-  border: 1px solid var(--pix-rule);
-  padding: 1rem;
-}
+.pagination-nav__link { border: 1px solid var(--pix-rule); border-radius: 8px; }
+.pagination-nav__link:hover { border-color: var(--ifm-color-primary); }
+.footer { border-top: 1px solid var(--pix-rule); background: var(--ifm-background-surface-color); color: var(--pix-ink-soft); }
+.footer__title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.breadcrumbs__link { font-size: 0.82rem; }

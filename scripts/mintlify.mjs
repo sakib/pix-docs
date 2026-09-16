@@ -41,12 +41,13 @@ for (const m of sidebarSrc.matchAll(/^\s{2}(\w+): \[([\s\S]*?)^\s{2}\],/gm)) {
   let loose = [];
   const flushLoose = () => {
     if (!loose.length) return;
+    if (name === 'Docs' && !groups.length) loose.unshift('index');
     groups.push({group: groups.length ? ({troubleshooting: 'Help', roadmap: 'Roadmap'}[loose[0]] ?? 'More') : 'Overview', pages: loose});
     loose = [];
   };
   for (const t of m[2].matchAll(/label: '([^']+)'|'([\w/-]+)'|\],/g)) {
     if (t[1]) { flushLoose(); cur = {group: t[1], pages: []}; groups.push(cur); }
-    else if (t[2]) { if (!isDoc(t[2])) continue; const page = t[2] === 'intro' ? 'index' : t[2]; (cur ? cur.pages : loose).push(page); }
+    else if (t[2]) { if (!isDoc(t[2])) continue; const page = t[2] === 'intro' ? 'introduction' : t[2]; (cur ? cur.pages : loose).push(page); }
     else if (cur) { cur = null; }
   }
   flushLoose();
@@ -76,7 +77,7 @@ const convert = (src, pagePath) => {
     `<Frame${c ? ` caption="${sub(c)}"` : ''}>\n  <img className="block dark:hidden" src="/images/diagrams/${n}-light.svg" alt="${sub(c ?? n)}" />\n  <img className="hidden dark:block" src="/images/diagrams/${n}-dark.svg" alt="${sub(c ?? n)}" />\n</Frame>`);
   // Screenshots do not exist yet; keep an HTML comment so the slot is findable.
   body = body.replace(/<Screenshot src="([^"]+)" caption="([^"]*)" \/>/g, (_, s, c) => `{/* screenshot: ${s} — ${sub(c)} */}`);
-  body = body.replace(/\]\(\/intro\)/g, '](/)').replace(/\]\(\/intro#/g, '](/#');
+  body = body.replace(/\]\(\/intro\)/g, '](/introduction)').replace(/\]\(\/intro#/g, '](/introduction#');
   const title = sub(meta.title ?? '');
   const description = sub(meta.description ?? '');
   const sidebarTitle = meta.sidebar_label ? sub(meta.sidebar_label) : null;
@@ -90,8 +91,66 @@ for (const f of ['quickstart.mdx']) if (existsSync(join(out, f))) rmSync(join(ou
 let n = 0;
 for (const file of walk(join(root, 'docs'))) {
   const rel = relative(join(root, 'docs'), file).replace(/\.md$/, '');
-  const target = rel === 'intro' ? 'index' : rel;
+  const target = rel === 'intro' ? 'introduction' : rel;
   writeFileSync(join(out, `${target}.mdx`), convert(readFileSync(file, 'utf8'), target)); n++;
+}
+
+// Landing page: Mintlify custom mode (navbar only), Tailwind classes with dark: variants.
+writeFileSync(join(out, 'index.mdx'), landing());
+function landing() {
+  const P = brand.product;
+  const card = (title, desc, href, icon) => `      <a href="${href}" className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 no-underline hover:border-orange-700 dark:hover:border-orange-400 transition-colors">
+        <Icon icon="${icon}" className="text-orange-700 dark:text-orange-400" size={22} />
+        <div className="mt-3 font-semibold text-zinc-900 dark:text-zinc-50">${title}</div>
+        <div className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">${desc}</div>
+      </a>`;
+  return `---
+title: "Documentation"
+description: "${brand.tagline}"
+mode: "custom"
+---
+
+<div className="max-w-5xl mx-auto px-6 pt-16 pb-24">
+  <div className="max-w-3xl">
+    <p className="text-xs font-semibold tracking-widest uppercase text-orange-700 dark:text-orange-400">Documentation</p>
+    <h1 className="mt-2 text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">${P}</h1>
+    <p className="mt-3 text-2xl font-medium text-zinc-800 dark:text-zinc-200">${brand.tagline}</p>
+    <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">Work with any coding agent, move sessions between them, and stay in control from your Mac, Linux desktop, iPhone, iPad, or browser. Everything stays in <code className="text-sm">${brand.homeDir}</code> on your own machine.</p>
+    <div className="mt-8 flex flex-wrap gap-3">
+      <a href="/getting-started/install" className="rounded-lg bg-orange-700 dark:bg-orange-500 px-5 py-2.5 font-semibold text-white no-underline hover:bg-orange-800 dark:hover:bg-orange-400">Get started</a>
+      <a href="${brand.siteUrl}" className="rounded-lg border border-orange-700 dark:border-orange-400 px-5 py-2.5 font-semibold text-orange-700 dark:text-orange-400 no-underline hover:bg-orange-50 dark:hover:bg-zinc-800">Download</a>
+    </div>
+    <p className="mt-6 text-sm text-zinc-500 dark:text-zinc-400 font-mono">■ Claude Code &nbsp; ■ Codex &nbsp; ■ Cursor &nbsp; ■ Pi &nbsp; <span className="opacity-60">■ OpenCode (soon) &nbsp; ■ Copilot (soon)</span></p>
+  </div>
+
+  <h2 className="mt-20 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">What ${P} does</h2>
+  <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+${card('One catalog', `Every session, on every agent, including the ones you ran before installing ${P}.`, '/guides/sessions', 'rectangle-list')}
+${card('Handoffs', 'Continue any session with a different agent. Start cheap, finish careful.', '/guides/handoffs', 'right-left')}
+${card('Branching', 'Fork from any completed turn. The original stays intact.', '/guides/branching', 'code-branch')}
+${card('Parallel work', 'Many sessions at once, each in its own worktree. Work survives a closed window.', '/guides/parallel-work', 'layer-group')}
+${card('Surfaces', 'Terminal, repository, browser, and simulator beside the chat. See what the agent did.', '/guides/surfaces', 'table-cells-large')}
+${card('Every device', 'One daemon; Mac, Linux, iPhone, iPad, and browser clients over LAN or Tailscale.', '/guides/remote-access', 'mobile-screen')}
+${card('Search', 'Trigram full-text search over titles, prompts, paths, branches, and states.', '/guides/search-and-catalog', 'magnifying-glass')}
+${card('Usage', 'Token spend and context occupancy per session, as it happens.', '/guides/usage-and-context', 'chart-simple')}
+  </div>
+
+  <h2 className="mt-20 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">How it fits</h2>
+  <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">A local daemon owns the state and the work. Clients are views onto it. Agents are the CLIs you already have, driven with your existing credentials.</p>
+  <div className="mt-6 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white dark:bg-zinc-900">
+    <img className="block dark:hidden w-full" src="/images/diagrams/architecture-light.svg" alt="Clients connect to one local daemon, which drives agent runtimes" />
+    <img className="hidden dark:block w-full" src="/images/diagrams/architecture-dark.svg" alt="Clients connect to one local daemon, which drives agent runtimes" />
+  </div>
+  <p className="mt-3"><a href="/under-the-hood/architecture" className="font-semibold text-orange-700 dark:text-orange-400">Read the architecture →</a></p>
+
+  <h2 className="mt-20 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Next steps</h2>
+  <div className="mt-5 grid gap-4 sm:grid-cols-3">
+${card('Run your first session', 'Add a project, pick an agent, send a prompt, find it again.', '/getting-started/first-session', 'play')}
+${card('Look under the hood', 'Session logs, blobs, projections, and the index, explained from the files on disk.', '/under-the-hood/architecture', 'gear')}
+${card('Evaluate for a team', 'What is free, what the enterprise edition adds, and what is planned.', '/enterprise/editions', 'building')}
+  </div>
+</div>
+`;
 }
 
 // Diagrams: static-colour variants, since <img> cannot resolve CSS variables.

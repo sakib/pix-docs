@@ -2,8 +2,7 @@
   border-bottom: 1px solid var(--pix-rule);
   background:
     linear-gradient(to bottom, transparent, var(--ifm-background-color)),
-    repeating-linear-gradient(0deg, transparent 0 23px, var(--pix-rule) 23px 24px),
-    repeating-linear-gradient(90deg, transparent 0 23px, var(--pix-rule) 23px 24px);
+    radial-gradient(60% 60% at 20% 0%, var(--pix-accent-soft), transparent 70%);
 }
 .heroInner {
   max-width: 880px;
@@ -18,7 +17,8 @@
   color: var(--ifm-color-primary);
   margin-bottom: 0.5rem;
 }
-.title {
+  .title {
+  font-family: var(--pix-display-font);
   font-size: clamp(3rem, 7vw, 4.5rem);
   line-height: 1;
   margin-bottom: 0.5rem;
@@ -47,7 +47,7 @@
   font-weight: 600;
   padding: 0.65rem 1.2rem;
   border: 1px solid var(--ifm-color-primary);
-  border-radius: 3px;
+  border-radius: 8px;
   text-decoration: none;
 }
 .primary {
@@ -55,6 +55,7 @@
   color: #fff;
 }
 .primary:hover { color: #fff; text-decoration: none; background: var(--ifm-color-primary-dark); }
+.secondary { border-color: var(--pix-rule); color: var(--ifm-font-color-base); }
 .secondary { color: var(--ifm-color-primary); }
 .secondary:hover { text-decoration: none; background: rgba(168, 65, 11, 0.08); }
 

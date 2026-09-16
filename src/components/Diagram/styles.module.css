@@ -1,7 +1,11 @@
 .figure {
   margin: 1.5rem 0 2rem;
 }
-.svg {
+  .svg {
+  border: 1px solid var(--pix-rule);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--ifm-background-surface-color);
   display: block;
   width: 100%;
   height: auto;
