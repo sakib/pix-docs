@@ -34,6 +34,18 @@ mintlify:
 crash-check url="https://sakib.github.io/pix-docs":
     node scripts/crash-check.mjs {{url}}
 
+# Start ONE Mintlify dev server for the mirror (Node LTS) at http://localhost:3333/
+mint-dev:
+    cd ../pix-docs-mintlify && PATH="$HOME/.nvm/versions/node/v24.21.0/bin:$PATH" mint dev --port 3333
+
+# List palette variants, or switch the running mirror to one: just palette N-classic-black-beige
+palette name="":
+    node scripts/palette.mjs {{name}}
+
+# Restore the mirror's committed docs.json after palette review
+palette-reset:
+    node scripts/palette.mjs --reset
+
 # Typecheck config and components
 check:
     npm run typecheck
