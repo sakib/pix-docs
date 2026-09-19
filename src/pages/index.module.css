@@ -1,7 +1,14 @@
+/*
+ * Graph-paper lattice, carried over from the marketing site's classic-Mac
+ * identity, over a warm accent glow. The top gradient fades the grid out
+ * before it reaches the content so it reads as texture, not as a table.
+ */
 .hero {
   border-bottom: 1px solid var(--pix-rule);
   background:
     linear-gradient(to bottom, transparent, var(--ifm-background-color)),
+    repeating-linear-gradient(0deg, transparent 0 23px, var(--pix-rule) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, var(--pix-rule) 23px 24px),
     radial-gradient(60% 60% at 20% 0%, var(--pix-accent-soft), transparent 70%);
 }
 .heroInner {
