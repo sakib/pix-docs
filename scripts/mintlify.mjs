@@ -189,5 +189,15 @@ const docsJson = {
   footer: {socials: {github: `https://github.com/${brand.githubOrg}`}},
   seo: {indexing: 'all'},
 };
-writeFileSync(join(out, 'docs.json'), JSON.stringify(docsJson, null, 2) + '\n');
+// Preserve a palette-review banner across regenerates. Without this, running
+// the generator silently un-publishes the swatch strip.
+const existingDocsJson = join(out, 'docs.json');
+if (existsSync(existingDocsJson)) {
+  const prev = JSON.parse(readFileSync(existingDocsJson, 'utf8'));
+  if (prev.banner?.content?.startsWith('Palette: ')) {
+    docsJson.banner = prev.banner;
+    for (const k of ['theme', 'colors', 'background', 'fonts']) if (prev[k]) docsJson[k] = prev[k];
+  }
+}
+writeFileSync(existingDocsJson, JSON.stringify(docsJson, null, 2) + '\n');
 console.log(`${n} pages -> ${relative(process.cwd(), out)} (${tabs.map((t) => `${t.tab}: ${t.groups.reduce((a, g) => a + g.pages.length, 0)}`).join(', ')})`);

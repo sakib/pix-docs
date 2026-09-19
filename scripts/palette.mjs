@@ -23,6 +23,12 @@
  * Caveat: a variant that changes Mintlify's `theme` (maple, almond, linden,
  * palm) only changes layout when written to docs.json. Those swatches are
  * marked, and "save" writes the previewed variant to disk.
+ *
+ * The strip is PUBLISHED: palette-picker.js is committed so the deployed site
+ * shows it too, for review from any device. Colour preview is pure client-side
+ * and works anywhere; "save" needs the local switch server, so it only renders
+ * on localhost. Remove both this script's output and the docs.json banner
+ * before the docs go to real users — `--unpublish` does that.
  */
 import {readFileSync, writeFileSync, readdirSync, rmSync, existsSync} from 'node:fs';
 import {join, dirname} from 'node:path';
@@ -48,6 +54,13 @@ if (!arg) {
     const bg = v.background?.color ? ` bg ${v.background.color.light}/${v.background.color.dark}` : '';
     console.log(`  ${name.padEnd(24)} ${v.theme.padEnd(7)} accent ${v.colors.primary}/${v.colors.light}${bg}`);
   }
+  process.exit(0);
+}
+
+if (arg === '--unpublish') {
+  execSync('git checkout -q docs.json', {cwd: site});
+  rmSync(pickerJs, {force: true});
+  console.log('palette-picker.js removed and docs.json restored. Commit and push to take the strip off the deployed site.');
   process.exit(0);
 }
 
@@ -84,7 +97,7 @@ const script = `// Palette review strip. Written by scripts/palette.mjs; removed
 // Switches colours client-side via Mintlify's CSS variables: instant, and the
 // strip never unmounts. Stateless — current variant is read from the banner.
 (function () {
-  if (!/^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname)) return;
+  var LOCAL = /^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname);
   var VARIANTS = ${JSON.stringify(data)};
   var SAVE = 'http://localhost:3334/switch?name=';
   var MARKER = /Palette:\\s*([A-Za-z0-9._-]+)/;
@@ -150,7 +163,9 @@ const script = `// Palette review strip. Written by scripts/palette.mjs; removed
     label.style.cssText = 'margin-left:8px;opacity:.75;font-size:.85em;white-space:nowrap;';
     strip.appendChild(label);
 
-    if (preview && preview !== configured) {
+    // "save" writes docs.json through the local switch server, so it is
+    // meaningless on the deployed site.
+    if (LOCAL && preview && preview !== configured) {
       var save = document.createElement('a');
       save.href = '#';
       save.textContent = 'save';

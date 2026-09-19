@@ -46,6 +46,10 @@ palette name="":
 palette-picker:
     node scripts/palette-picker.mjs
 
+# Remove the swatch strip from the deployed site (do this before launch)
+palette-unpublish:
+    node scripts/palette.mjs --unpublish
+
 # Restore the mirror's committed docs.json after palette review
 palette-reset:
     node scripts/palette.mjs --reset
