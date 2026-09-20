@@ -6,7 +6,8 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
   docs: [
-    'intro',
+    // "Getting started" leads so the Docs tab opens the install guide; the
+    // intro is reachable from the landing page and the top of Guides.
     {
       type: 'category',
       label: 'Getting started',
@@ -24,6 +25,7 @@ const sidebars: SidebarsConfig = {
       className: 'sidebar-guides',
       collapsed: false,
       items: [
+        'intro',
         'guides/sessions',
         'guides/handoffs',
         'guides/branching',

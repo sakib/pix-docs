@@ -80,7 +80,6 @@ if (!v) {
 const base = JSON.parse(execSync('git show HEAD:docs.json', {cwd: site, encoding: 'utf8'}));
 const cfg = {...base, ...v, appearance: {default: 'system'}};
 if (!v.fonts) cfg.fonts = base.fonts;
-cfg.banner = {content: `Palette: ${arg}`, dismissible: false};
 writeFileSync(docsJson, JSON.stringify(cfg, null, 2) + '\n');
 
 const data = ordered.map(([name, vv]) => ({
@@ -93,17 +92,23 @@ const data = ordered.map(([name, vv]) => ({
   bgDark: vv.background?.color?.dark ?? '#0b0b0b',
 }));
 
-const script = `// Palette review strip. Written by scripts/palette.mjs; removed by --reset.
-// Switches colours client-side via Mintlify's CSS variables: instant, and the
-// strip never unmounts. Stateless — current variant is read from the banner.
+const script = `// Palette review strip. Written by scripts/palette.mjs; removed by --unpublish.
+//
+// PURELY ADDITIVE: this appends one fixed-position bar to <body> and never
+// reads, clears, or replaces any element Mintlify rendered. An earlier version
+// mounted into the banner by clearing its parent's textContent, which on the
+// production build also deleted the navigation — the container holding the
+// banner text holds the nav too. Nothing here can remove page content.
+//
+// Colour switching rewrites Mintlify's five CSS custom properties in an
+// injected <style>, so it is instant and needs no server.
 (function () {
+  window.__paletteBar = 'loaded';
   var LOCAL = /^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname);
   var VARIANTS = ${JSON.stringify(data)};
+  var CONFIGURED = ${JSON.stringify(arg)};
   var SAVE = 'http://localhost:3334/switch?name=';
-  var MARKER = /Palette:\\s*([A-Za-z0-9._-]+)/;
-  var STYLE_ID = 'palette-override';
-  var preview = null;       // variant being previewed, null = as configured
-  var configured = null;    // what docs.json actually says
+  var preview = null;
 
   function rgb(hex) {
     var h = hex.replace('#', '');
@@ -113,114 +118,92 @@ const script = `// Palette review strip. Written by scripts/palette.mjs; removed
   }
 
   function apply(v) {
-    var el = document.getElementById(STYLE_ID);
-    if (!el) {
-      el = document.createElement('style');
-      el.id = STYLE_ID;
-      document.head.appendChild(el);
-    }
+    var el = document.getElementById('palette-override');
+    if (!el) { el = document.createElement('style'); el.id = 'palette-override'; }
+    // Re-append so this rule is always the last stylesheet in <head>, and mark
+    // each property !important: Mintlify's own theme CSS loads after us and
+    // would otherwise win on source order at equal specificity.
+    document.head.appendChild(el);
     if (!v) { el.textContent = ''; return; }
+    var imp = function (name, hex) { return '--' + name + ':' + rgb(hex) + ' !important;'; };
     el.textContent = ':root, html, body, .light, .dark {' +
-      '--primary:' + rgb(v.accent) + ';' +
-      '--primary-light:' + rgb(v.accentLight) + ';' +
-      '--primary-dark:' + rgb(v.accentDark) + ';' +
-      '--background-light:' + rgb(v.bg) + ';' +
-      '--background-dark:' + rgb(v.bgDark) + ';' +
-      '}';
+      imp('primary', v.accent) + imp('primary-light', v.accentLight) +
+      imp('primary-dark', v.accentDark) + imp('background-light', v.bg) +
+      imp('background-dark', v.bgDark) + '}';
   }
 
-  function isDark() { return document.documentElement.classList.contains('dark'); }
+  function dark() { return document.documentElement.classList.contains('dark'); }
 
-  function build() {
-    var shown = preview || configured;
-    var strip = document.createElement('span');
-    strip.className = 'palette-strip';
-    strip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;vertical-align:middle;flex-wrap:wrap;';
-    var dark = isDark();
+  function fill(bar) {
+    bar.textContent = '';
+    var shown = preview || CONFIGURED;
+    var isDark = dark();
+    var tag = document.createElement('span');
+    tag.textContent = 'palette';
+    tag.style.cssText = 'font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.55;margin-right:2px;';
+    bar.appendChild(tag);
     VARIANTS.forEach(function (v) {
       var a = document.createElement('a');
-      a.href = '#';
-      a.title = v.name + (v.theme !== 'mint' ? ' (theme ' + v.theme + ' — save to see layout)' : '');
+      a.href = '#'; a.title = v.name + (v.theme !== 'mint' ? ' (theme ' + v.theme + ')' : '');
       a.setAttribute('data-palette', v.name);
-      a.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;border:1px solid rgba(128,128,128,.45);background:' +
-        (dark ? v.bgDark : v.bg) + ';cursor:pointer;' +
+      a.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;cursor:pointer;background:' +
+        (isDark ? v.bgDark : v.bg) + ';border:1px solid rgba(128,128,128,.5);' +
         (v.name === shown ? 'outline:2px solid currentColor;outline-offset:1px;' : '') +
         (v.theme !== 'mint' ? 'border-style:dashed;' : '');
       var dot = document.createElement('span');
-      dot.style.cssText = 'display:block;width:11px;height:11px;border-radius:3px;background:' + (dark ? v.accentLight : v.accent) + ';';
+      dot.style.cssText = 'display:block;width:11px;height:11px;border-radius:3px;background:' + (isDark ? v.accentLight : v.accent) + ';';
       a.appendChild(dot);
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        preview = v.name;
-        apply(v);
-        render();
-      });
-      strip.appendChild(a);
+      a.addEventListener('click', function (e) { e.preventDefault(); preview = v.name; apply(v); fill(bar); });
+      bar.appendChild(a);
     });
-
     var label = document.createElement('span');
-    label.textContent = shown + (preview && preview !== configured ? ' (preview)' : '');
-    label.style.cssText = 'margin-left:8px;opacity:.75;font-size:.85em;white-space:nowrap;';
-    strip.appendChild(label);
-
-    // "save" writes docs.json through the local switch server, so it is
-    // meaningless on the deployed site.
-    if (LOCAL && preview && preview !== configured) {
+    label.textContent = shown;
+    label.style.cssText = 'font-size:12px;opacity:.75;margin-left:6px;white-space:nowrap;';
+    bar.appendChild(label);
+    if (LOCAL && preview && preview !== CONFIGURED) {
       var save = document.createElement('a');
-      save.href = '#';
-      save.textContent = 'save';
-      save.title = 'Write this variant to docs.json (slow: the dev server rebuilds)';
-      save.style.cssText = 'margin-left:8px;font-size:.8em;opacity:.8;text-decoration:underline;cursor:pointer;';
+      save.href = '#'; save.textContent = 'save';
+      save.style.cssText = 'font-size:12px;margin-left:8px;text-decoration:underline;cursor:pointer;';
       save.addEventListener('click', function (e) {
-        e.preventDefault();
-        save.textContent = 'saving...';
+        e.preventDefault(); save.textContent = 'saving...';
         fetch(SAVE + encodeURIComponent(preview), {mode: 'no-cors'}).catch(function () {});
       });
-      strip.appendChild(save);
-
-      var rev = document.createElement('a');
-      rev.href = '#';
-      rev.textContent = 'revert';
-      rev.style.cssText = save.style.cssText;
-      rev.addEventListener('click', function (e) {
-        e.preventDefault();
-        preview = null;
-        apply(null);
-        render();
-      });
-      strip.appendChild(rev);
+      bar.appendChild(save);
     }
-    return strip;
-  }
-
-  function render() {
-    document.querySelectorAll('.palette-strip').forEach(function (s) { s.replaceWith(build()); });
-  }
-
-  function mount() {
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    var node, found = [];
-    while ((node = walker.nextNode())) {
-      var m = node.nodeValue && node.nodeValue.match(MARKER);
-      if (m) found.push({host: node.parentElement, name: m[1]});
-    }
-    if (!found.length) return;
-    configured = found[0].name;
-    // docs.json caught up with the preview — clear the override so the real
-    // config renders, including any theme change.
-    if (preview && preview === configured) { preview = null; apply(null); }
-    found.forEach(function (f) { if (f.host) { f.host.textContent = ''; f.host.appendChild(build()); } });
-    if (preview) { var v = VARIANTS.find(function (x) { return x.name === preview; }); if (v) apply(v); }
   }
 
   function start() {
-    mount();
-    new MutationObserver(mount).observe(document.body, {childList: true, subtree: true});
-    new MutationObserver(render).observe(document.documentElement, {attributes: true, attributeFilter: ['class']});
+    if (document.getElementById('palette-bar')) return;
+    var bar = document.createElement('div');
+    bar.id = 'palette-bar';
+    // Bottom rather than top: a fixed top bar would overlap Mintlify's own
+    // navbar, and compensating for that means editing its layout. The bottom
+    // is always visible and collides with nothing.
+    bar.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:2147483647;' +
+      'display:flex;align-items:center;gap:5px;padding:7px 11px;border-radius:10px;' +
+      'background:rgba(250,250,250,.94);color:#18181b;border:1px solid rgba(0,0,0,.14);' +
+      'box-shadow:0 3px 14px rgba(0,0,0,.16);font-family:ui-sans-serif,system-ui,sans-serif;' +
+      'backdrop-filter:blur(8px);max-width:94vw;flex-wrap:wrap;justify-content:center;';
+    if (dark()) bar.style.background = 'rgba(24,24,27,.94)', bar.style.color = '#e4e4e7';
+    document.documentElement.appendChild(bar);
+    fill(bar);
+    new MutationObserver(function () {
+      if (dark()) { bar.style.background = 'rgba(24,24,27,.94)'; bar.style.color = '#e4e4e7'; }
+      else { bar.style.background = 'rgba(250,250,250,.94)'; bar.style.color = '#18181b'; }
+      fill(bar);
+    }).observe(document.documentElement, {attributes: true, attributeFilter: ['class']});
   }
 
-  if (document.body) start();
-  else document.addEventListener('DOMContentLoaded', start);
+  // React hydration replaces <body>'s children and drops anything it did not
+  // render, so mounting once is not enough — re-append whenever it vanishes.
+  function keep() {
+    start();
+    new MutationObserver(function () {
+      if (!document.getElementById('palette-bar')) start();
+    }).observe(document.documentElement, {childList: true, subtree: false});
+  }
+  if (document.body) keep();
+  else document.addEventListener('DOMContentLoaded', keep);
 })();
 `;
 

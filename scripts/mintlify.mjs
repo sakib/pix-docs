@@ -41,7 +41,7 @@ for (const m of sidebarSrc.matchAll(/^\s{2}(\w+): \[([\s\S]*?)^\s{2}\],/gm)) {
   let loose = [];
   const flushLoose = () => {
     if (!loose.length) return;
-    if (name === 'Docs' && !groups.length) loose.unshift('index');
+
     groups.push({group: groups.length ? ({troubleshooting: 'Help', roadmap: 'Roadmap'}[loose[0]] ?? 'More') : 'Overview', pages: loose});
     loose = [];
   };
@@ -51,6 +51,17 @@ for (const m of sidebarSrc.matchAll(/^\s{2}(\w+): \[([\s\S]*?)^\s{2}\],/gm)) {
     else if (cur) { cur = null; }
   }
   flushLoose();
+  if (name === 'Docs') {
+    // Drop the standalone overview entries from the front, then re-home the
+    // introduction as the first Guides page so "Docs" lands on install.
+    const overview = groups.find((g) => g.group === 'Overview');
+    if (overview) {
+      groups.splice(groups.indexOf(overview), 1);
+      const guides = groups.find((g) => g.group === 'Guides');
+      const intro = overview.pages.filter((p) => p !== 'index');
+      if (guides && intro.length) guides.pages.unshift(...intro);
+    }
+  }
   tabs.push({tab: name, groups});
 }
 
@@ -99,8 +110,8 @@ for (const file of walk(join(root, 'docs'))) {
 writeFileSync(join(out, 'index.mdx'), landing());
 function landing() {
   const P = brand.product;
-  const card = (title, desc, href, icon) => `      <a href="${href}" className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 no-underline hover:border-orange-700 dark:hover:border-orange-400 transition-colors">
-        <Icon icon="${icon}" className="text-orange-700 dark:text-orange-400" size={22} />
+  const card = (title, desc, href, icon) => `      <a href="${href}" className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-[rgb(var(--background-light))] dark:bg-[rgb(var(--background-dark))] p-5 no-underline hover:border-[rgb(var(--primary))] dark:hover:border-[rgb(var(--primary-light))] transition-colors">
+        <Icon icon="${icon}" className="text-[rgb(var(--primary))] dark:text-[rgb(var(--primary-light))]" size={22} />
         <div className="mt-3 font-semibold text-zinc-900 dark:text-zinc-50">${title}</div>
         <div className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">${desc}</div>
       </a>`;
@@ -112,13 +123,13 @@ mode: "custom"
 
 <div className="max-w-5xl mx-auto px-6 pt-16 pb-24">
   <div className="max-w-3xl">
-    <p className="text-xs font-semibold tracking-widest uppercase text-orange-700 dark:text-orange-400">Documentation</p>
+    <p className="text-xs font-semibold tracking-widest uppercase text-[rgb(var(--primary))] dark:text-[rgb(var(--primary-light))]">Documentation</p>
     <h1 className="mt-2 text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">${P}</h1>
     <p className="mt-3 text-2xl font-medium text-zinc-800 dark:text-zinc-200">${brand.tagline}</p>
     <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">Work with any coding agent, move sessions between them, and stay in control from your Mac, Linux desktop, iPhone, iPad, or browser. Everything stays in <code className="text-sm">${brand.homeDir}</code> on your own machine.</p>
     <div className="mt-8 flex flex-wrap gap-3">
-      <a href="/getting-started/install" className="rounded-lg bg-orange-700 dark:bg-orange-500 px-5 py-2.5 font-semibold text-white no-underline hover:bg-orange-800 dark:hover:bg-orange-400">Get started</a>
-      <a href="${brand.siteUrl}" className="rounded-lg border border-orange-700 dark:border-orange-400 px-5 py-2.5 font-semibold text-orange-700 dark:text-orange-400 no-underline hover:bg-orange-50 dark:hover:bg-zinc-800">Download</a>
+      <a href="/getting-started/install" className="rounded-lg bg-[rgb(var(--primary))] dark:bg-[rgb(var(--primary-light))] px-5 py-2.5 font-semibold text-white no-underline hover:opacity-90">Get started</a>
+      <a href="${brand.siteUrl}" className="rounded-lg border border-[rgb(var(--primary))] dark:border-[rgb(var(--primary-light))] px-5 py-2.5 font-semibold text-[rgb(var(--primary))] dark:text-[rgb(var(--primary-light))] no-underline hover:opacity-80">Download</a>
     </div>
     <p className="mt-6 text-sm text-zinc-500 dark:text-zinc-400 font-mono">■ Claude Code &nbsp; ■ Codex &nbsp; ■ Cursor &nbsp; ■ Pi &nbsp; <span className="opacity-60">■ OpenCode (soon) &nbsp; ■ Copilot (soon)</span></p>
   </div>
@@ -137,11 +148,11 @@ ${card('Usage', 'Token spend and context occupancy per session, as it happens.',
 
   <h2 className="mt-20 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">How it fits</h2>
   <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">A local daemon owns the state and the work. Clients are views onto it. Agents are the CLIs you already have, driven with your existing credentials.</p>
-  <div className="mt-6 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white dark:bg-zinc-900">
+  <div className="mt-6 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-[rgb(var(--background-light))] dark:bg-[rgb(var(--background-dark))]">
     <img className="block dark:hidden w-full" src="/images/diagrams/architecture-light.svg" alt="Clients connect to one local daemon, which drives agent runtimes" />
     <img className="hidden dark:block w-full" src="/images/diagrams/architecture-dark.svg" alt="Clients connect to one local daemon, which drives agent runtimes" />
   </div>
-  <p className="mt-3"><a href="/under-the-hood/architecture" className="font-semibold text-orange-700 dark:text-orange-400">Read the architecture →</a></p>
+  <p className="mt-3"><a href="/under-the-hood/architecture" className="font-semibold text-[rgb(var(--primary))] dark:text-[rgb(var(--primary-light))]">Read the architecture →</a></p>
 
   <h2 className="mt-20 text-2xl font-semibold text-zinc-900 dark:text-zinc-50">Next steps</h2>
   <div className="mt-5 grid gap-4 sm:grid-cols-3">
@@ -177,7 +188,7 @@ const docsJson = {
   description: brand.tagline,
   colors: {primary: '#a8410b', light: '#f0a868', dark: '#8e370a'},
   favicon: '/favicon.svg',
-  logo: {light: '/logo/light.svg', dark: '/logo/dark.svg', href: brand.siteUrl},
+  logo: {light: '/logo/light.svg', dark: '/logo/dark.svg', href: '/'},
   fonts: {heading: {family: 'Oxanium', weight: 700}},
   appearance: {default: 'system'},
   navigation: {

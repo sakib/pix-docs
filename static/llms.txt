@@ -4,10 +4,10 @@
 
 ## Docs
 
-- [What is Pix?](https://sakib.github.io/pix-docs/intro): What Pix is, the problem it solves, and where to start.
 - [Install](https://sakib.github.io/pix-docs/getting-started/install): Install Pix on macOS, Linux, iPhone, and iPad, and confirm the daemon is running.
 - [Your first session](https://sakib.github.io/pix-docs/getting-started/first-session): Add a project, pick an agent, send a prompt, use the surfaces, and find the session again.
 - [Connecting agents](https://sakib.github.io/pix-docs/getting-started/connecting-agents): How Pix detects Claude Code, Codex, Cursor, and Pi, reuses their credentials, and shows only the controls each supports.
+- [What is Pix?](https://sakib.github.io/pix-docs/intro): What Pix is, the problem it solves, and where to start.
 - [Sessions](https://sakib.github.io/pix-docs/guides/sessions): What a session holds, its four states, live versus idle, and the append-only log behind it.
 - [Handoffs](https://sakib.github.io/pix-docs/guides/handoffs): Continue any session with a different agent. What carries over, what does not, and when to branch instead.
 - [Branching and forking](https://sakib.github.io/pix-docs/guides/branching): Fork a new session from any completed turn while leaving the original intact.
